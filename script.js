@@ -9,6 +9,9 @@ const score = document.querySelector('.score'), // очки
 // Массив с рекордами
 let record = [];
 
+// Фоновая песня (Пока что просто объект Audio)
+let audio = new Audio();
+
 car.classList.add('car');
 // Начало по нажатии на Enter 
 function enterGame(e) {
@@ -37,7 +40,23 @@ const setting = {
   traffic: 3
 };
 
+// Фоновая музыка
+
+
+function playSound() {
+  audio.src = './audio/1.mp3'; // Указываем путь к звуку "клика"
+  audio.autoplay = true; // Автоматически запускаем
+}
+
+function stopSound(){
+  audio.pause();
+  audio.currentTime = 0.0;
+}
+
 function startGame() {
+
+  // playSound()
+  
   // Скрываем сложность и "Нажатие на старт"
   complexity.classList.add('hide');
   start.classList.add('hide');
@@ -51,12 +70,15 @@ function startGame() {
   gameArea.innerHTML = '';
   bgArea.innerHTML = '';
 
+  car.style.left = 125 + 'px';
+  car.style.top = 80 + '%';
+
   // Полосы(имитация дороги)
-  for (let i = 0; i < 9; i++) {
+  for (let i = 0; i < 10; i++) {
     const line = document.createElement('div');
     line.classList.add('line');
     // Позиции каждой черты(не путать с движением. Это просто расположение)
-    line.style.top = i * 82 + 'px';
+    line.style.top = i * 80 + 'px';
     // .y понадобится для движения дороги
     line.y = i * 82;
     gameArea.appendChild(line);
@@ -66,7 +88,7 @@ function startGame() {
   for (let i = 0; i < 5; i++) {
     const house = document.createElement('div');
     house.classList.add('house');
-    house.style.backgroundImage = 'url("./image/home.png")';
+    house.style.backgroundImage = 'url("./image/home.webp")';
     // Позиции каждой черты(не путать с движением. Это просто расположение)
     house.style.top =  (i * 82) * -1 + 'px';
     let ans = Math.random() * (bgArea.offsetWidth - 100);
@@ -82,12 +104,13 @@ function startGame() {
 
 
   // Движение машин
-  for (let i = 0; i < 3; i++) {
+  for (let i = 1; i < 4; i++) {
     const enemy = document.createElement('div');
     enemy.classList.add('enemy');
     enemy.style.top = (i * 100) + 'px';
     // Больше значение трафика - дольше друг от друга машины
-    enemy.y = 100 * setting.traffic * i + 1;
+    enemy.y = -1 * 100 * setting.traffic * i + 1;
+    console.log(enemy.y)
     enemy.style.top = enemy.y + 'px';
     // По оси Х рандомное расположение 
     enemy.style.left = Math.random() * (gameArea.offsetWidth - 50) + 'px';
@@ -183,10 +206,13 @@ function moveEnemy() {
     let carRect = car.getBoundingClientRect();
     let enemyRect = key.getBoundingClientRect();
     // Если координаты перескаются - событие окончания игры
-    if (carRect.top < enemyRect.bottom && carRect.right > enemyRect.left && carRect.left < enemyRect.right && carRect.bottom > enemyRect.top) {
+    if (carRect.top < enemyRect.bottom && carRect.right > enemyRect.left 
+    && carRect.left < enemyRect.right && carRect.bottom > enemyRect.top) {
       setting.start = false;
       start.classList.remove('hide');
       complexity.classList.remove('hide');
+      // Останавливаем песню
+      stopSound();
       // Добавляем рекорд в массив и выводим в div
       record.push(setting.score);
       rec.innerHTML = 'Рекорд = ' + Math.max(...record);
@@ -200,6 +226,8 @@ function moveEnemy() {
     if (key.y > document.documentElement.clientHeight) {
       key.y = -100 * setting.traffic;
       key.style.left = Math.random() * (gameArea.offsetWidth - 50) + 'px';
+      let im = Math.round(Math.random() * 3) + 1;
+      key.style.background = `url('./image/enemy/${im}.webp') center / cover no-repeat`;
     }
   }
 }
