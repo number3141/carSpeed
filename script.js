@@ -1,6 +1,6 @@
 const score = document.querySelector('.score'), // очки
   start = document.querySelector('.start'), // кнопка старта
-  gameArea = document.querySelector('.gameArea'), // игровое поде
+  gameArea = document.querySelector('.gameArea'), // игровое поле
   car = document.createElement('div'), //авто игрока 
   rec = document.querySelector('.record'), //авто противников 
   complexity = document.querySelector('.complexity'), //поле выбора сложности
@@ -8,6 +8,12 @@ const score = document.querySelector('.score'), // очки
   compRange = document.querySelector('#complexityRange'); //Range выбора сложности 
 // Массив с рекордами
 let record = [];
+
+ // Создание элемента босса и диалогового окна
+ const enemyBoss = document.createElement('div');
+ const dialogArea = document.createElement('div');
+ bgArea.appendChild(dialogArea);
+ const btnReady = document.createElement('button');
 
 // Фоновая песня (Пока что просто объект Audio)
 let audio = new Audio();
@@ -19,9 +25,6 @@ function enterGame(e) {
     startGame();
   }
 }
-
-// Нажание та Enter
-document.addEventListener('keydown', enterGame);
 
 document.addEventListener('keydown', startRun);
 document.addEventListener('keyup', stopRun);
@@ -40,6 +43,58 @@ const setting = {
   traffic: 3
 };
 
+// Массив с фразами антагониста
+
+const speakAngryBoss = [
+  ['Привет, придурок. Я тут слыхал, ты хочешь бросить вызов моим парням? Думаешь, мы дадим шанс какому-то выскочке? Для начала набери 20 000 очков чтобы показать себя']
+
+]
+
+
+let speakWitchAngry = new Promise(function(resolve, reject){
+  // Стартовый диалог со злодеем 
+
+function firstSpeakWithAngry() {
+  dialogArea.classList.add('dialogArea');
+  enemyBoss.classList.add('enemyBoss')
+  bgArea.appendChild(enemyBoss);
+  // Плавное появление букв
+  let speak = speakAngryBoss[0].toString();
+  let arr = speak.split('');
+  // Скорость появления букв
+  let i = 0.02;
+  arr.map((key) => {
+    let span = document.createElement('span');
+    span.textContent = key;
+    span.style.animation = `1s ghost ${i}s forwards`;
+    i += 0.02;
+    resolve(dialogArea.appendChild(span));
+  })
+}
+
+firstSpeakWithAngry()
+
+})
+
+// Когда диалог с боссом закончился 
+
+speakWitchAngry.then(() => {
+  setTimeout(() => {
+    // После 5 сек. добавляем кнопку
+    dialogArea.appendChild(btnReady);
+    btnReady.textContent = 'Начать';
+    // И обработчик клика по ней
+    btnReady.addEventListener('click', () => {
+      // Очищаем фон 
+      bgArea.innerHTML = ''
+      // Нажатие на Enter
+      document.addEventListener('keydown', enterGame);
+    })
+  }, 5000)
+});
+
+
+
 // Фоновая музыка
 
 
@@ -48,7 +103,7 @@ function playSound() {
   audio.autoplay = true; // Автоматически запускаем
 }
 
-function stopSound(){
+function stopSound() {
   audio.pause();
   audio.currentTime = 0.0;
 }
@@ -56,7 +111,7 @@ function stopSound(){
 function startGame() {
 
   // playSound()
-  
+
   // Скрываем сложность и "Нажатие на старт"
   complexity.classList.add('hide');
   start.classList.add('hide');
@@ -84,21 +139,21 @@ function startGame() {
     gameArea.appendChild(line);
   }
 
-     // Фон
+  // Фон
   for (let i = 0; i < 5; i++) {
     const house = document.createElement('div');
     house.classList.add('house');
     house.style.backgroundImage = 'url("./image/home.webp")';
     // Позиции каждой черты(не путать с движением. Это просто расположение)
-    house.style.top =  (i * 82) * -1 + 'px';
+    house.style.top = (i * 82) * -1 + 'px';
     let ans = Math.random() * (bgArea.offsetWidth - 100);
-      if(ans > 900 || ans < 400){
-        house.style.left = ans + 'px';
-      }
+    if (ans > 900 || ans < 400) {
+      house.style.left = ans + 'px';
+    }
     // .y понадобится для движения дороги
     house.y = i * 120;
 
-    
+
     bgArea.appendChild(house);
   }
 
@@ -191,7 +246,7 @@ function moveBg() {
       key.y = -120;
       // Положение по X  - полная ширина минус ширина элемента
       let ans = Math.random() * (bgArea.offsetWidth - 100);
-      if(ans > 900 || ans < 400){
+      if (ans > 900 || ans < 400) {
         key.style.left = ans + 'px';
       }
     }
@@ -206,8 +261,8 @@ function moveEnemy() {
     let carRect = car.getBoundingClientRect();
     let enemyRect = key.getBoundingClientRect();
     // Если координаты перескаются - событие окончания игры
-    if (carRect.top < enemyRect.bottom && carRect.right > enemyRect.left 
-    && carRect.left < enemyRect.right && carRect.bottom > enemyRect.top) {
+    if (carRect.top < enemyRect.bottom && carRect.right > enemyRect.left &&
+      carRect.left < enemyRect.right && carRect.bottom > enemyRect.top) {
       setting.start = false;
       start.classList.remove('hide');
       complexity.classList.remove('hide');

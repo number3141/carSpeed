@@ -15,7 +15,7 @@ time, mark, audio, video {
 	padding: 0;
 	border: 0;
   font-size: 100%;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: 'Courier New', Courier, monospace;
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -157,3 +157,62 @@ body{
   height: 100px;
   margin: 10px;
 }
+
+
+.enemyBoss{
+  position: absolute;
+    width: 630px;
+    height: 951px;
+    background-size: cover;
+    background: url(./image/angry.webp) center center no-repeat;
+    right: -10%;
+    bottom: -15%;
+    z-index: 5;
+    transform: scale(0.5);  
+}
+
+
+.dialogArea{
+  position: absolute;
+  bottom: 1%;
+  width: 96vw;
+  height: 150px;
+  margin-left: 1vw;
+  padding-left: 20px;
+  padding-top: 15px;
+  background-color: #fff;
+  border-radius: 15px;
+  font-size: 30px;
+  color: #000;
+  z-index: 6;
+  transition: 1s;
+}
+
+.dialogArea button {
+  position: absolute;
+  font-size: 24px;
+  bottom: 15%;
+  right: 3%;
+  width: 200px;
+  height: 50px;
+  border-radius: 10px;
+}
+
+.dialogArea span{
+  transition: 2s;
+  opacity: 0;
+}
+
+
+@keyframes ghost {
+  from {
+    opacity: 0;
+    filter: blur(50px);
+  }
+  to{
+    opacity: 1;
+    filter: blur();
+  }
+}
+
+
