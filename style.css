@@ -67,6 +67,8 @@ body{
   background: transparent url('./image/enemy/1.webp') center / cover no-repeat;
 }
 
+/* Игровая область */
+
 .gameArea{
   width: 300px;
   height: 100%;
@@ -75,6 +77,8 @@ body{
   overflow: hidden;
   background: #000;
 }
+
+/* Полосы на дороге */
 
 .line{
   position: absolute;
@@ -99,6 +103,8 @@ body{
   background-color: #90ff00;
   font-size: 20px;
 }
+
+/* Очки + рекорд */
 
 .wrap {
   position: absolute;
@@ -131,11 +137,15 @@ body{
   border-radius: 5px;
 }
 
+/* Поле выбора сложности */
+
 .complexity{
   position: absolute;
   top: 20%;
   left: 8%;
 }
+
+/* Фон с домиками */
 
 .backgroundArea{
   width: 100%;
@@ -146,7 +156,7 @@ body{
 } 
 
 
-
+/* Сами домики */
 
 .house{
   background-size: cover;
@@ -158,6 +168,7 @@ body{
   margin: 10px;
 }
 
+/* Изображение босса */
 
 .enemyBoss{
   position: absolute;
@@ -171,6 +182,7 @@ body{
     transform: scale(0.5);  
 }
 
+/* Диалоговое окно */
 
 .dialogArea{
   position: absolute;
@@ -188,6 +200,8 @@ body{
   transition: 1s;
 }
 
+/* Кнопка продолжения диалогового окна */
+
 .dialogArea button {
   position: absolute;
   font-size: 24px;
@@ -197,12 +211,15 @@ body{
   height: 50px;
   border-radius: 10px;
 }
-
+/* Каждая буква во фразе  */
 .dialogArea span{
   transition: 2s;
   opacity: 0;
 }
 
+
+
+/* Анимация для букв */
 
 @keyframes ghost {
   from {

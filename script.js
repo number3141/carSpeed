@@ -6,6 +6,9 @@ const score = document.querySelector('.score'), // очки
   complexity = document.querySelector('.complexity'), //поле выбора сложности
   bgArea = document.querySelector('.backgroundArea'), //фон с домиками
   compRange = document.querySelector('#complexityRange'); //Range выбора сложности 
+
+  // ID функции - прорисовщика
+  let myReq, secondMyReq;
 // Массив с рекордами
 let record = [];
 
@@ -44,34 +47,39 @@ const setting = {
 };
 
 // Массив с фразами антагониста
+let numSpeak = 0;
+let firstSpeakWithAngry;
 
 const speakAngryBoss = [
-  ['Привет, придурок. Я тут слыхал, ты хочешь бросить вызов моим парням? Думаешь, мы дадим шанс какому-то выскочке? Для начала набери 20 000 очков чтобы показать себя']
-
+  ['Эй, придурок. Мне сказали, ты хочешь бросить вызов моим парням? Думаешь, мы дадим шанс какому-то выскочке? Для начала набери 20 000 очков чтобы показать себя'],
+  ['Неплохо, придурок, но для нас ты всё равно лох']
 ]
 
 
-let speakWitchAngry = new Promise(function(resolve, reject){
-  // Стартовый диалог со злодеем 
 
-function firstSpeakWithAngry() {
-  dialogArea.classList.add('dialogArea');
-  enemyBoss.classList.add('enemyBoss')
-  bgArea.appendChild(enemyBoss);
-  // Плавное появление букв
-  let speak = speakAngryBoss[0].toString();
-  let arr = speak.split('');
-  // Скорость появления букв
-  let i = 0.02;
-  arr.map((key) => {
-    let span = document.createElement('span');
-    span.textContent = key;
-    span.style.animation = `1s ghost ${i}s forwards`;
-    i += 0.02;
-    resolve(dialogArea.appendChild(span));
+  // Стартовый диалог со злодеем 
+  let speakWitchAngry = new Promise(function(resolve, reject){
+    firstSpeakWithAngry = function() {
+    dialogArea.classList.add('dialogArea');
+    enemyBoss.classList.add('enemyBoss');
+    enemyBoss.style.display = 'block';
+    dialogArea.style.display = 'block';
+    bgArea.appendChild(dialogArea);
+    bgArea.appendChild(enemyBoss);
+    // Плавное появление букв
+    let speak = speakAngryBoss[numSpeak].toString();
+    let arr = speak.split('');
+    console.log(numSpeak)
+    // Скорость появления букв
+    let i = 0.02;
+    arr.map((key) => {
+      let span = document.createElement('span');
+      span.textContent = key;
+      span.style.animation = `1s ghost ${i}s forwards`;
+      i += 0.02;
+      resolve(dialogArea.appendChild(span));
   })
 }
-
 firstSpeakWithAngry()
 
 })
@@ -79,18 +87,22 @@ firstSpeakWithAngry()
 // Когда диалог с боссом закончился 
 
 speakWitchAngry.then(() => {
+  numSpeak++;
   setTimeout(() => {
     // После 5 сек. добавляем кнопку
     dialogArea.appendChild(btnReady);
     btnReady.textContent = 'Начать';
     // И обработчик клика по ней
     btnReady.addEventListener('click', () => {
-      // Очищаем фон 
-      bgArea.innerHTML = ''
+      // Очищаем диалог
+      dialogArea.innerHTML = ' ';
+      // Очищаем фон
+      dialogArea.style.display = 'none';
+      enemyBoss.style.display = 'none';
       // Нажатие на Enter
       document.addEventListener('keydown', enterGame);
     })
-  }, 5000)
+  }, 1000)
 });
 
 
@@ -152,8 +164,6 @@ function startGame() {
     }
     // .y понадобится для движения дороги
     house.y = i * 120;
-
-
     bgArea.appendChild(house);
   }
 
@@ -178,11 +188,12 @@ function startGame() {
   // Фиксирование позиции авто 
   setting.x = car.offsetLeft;
   setting.y = car.offsetTop;
-  requestAnimationFrame(playGame);
+  playGame();
 }
 
 function playGame() {
   if (setting.start) {
+    
     setting.score += setting.speed;
     score.textContent = setting.score;
     moveRoad();
@@ -203,9 +214,34 @@ function playGame() {
     car.style.left = setting.x + 'px';
     car.style.top = setting.y + 'px';
     // Функция повторяет прорисовку самой себя
-    requestAnimationFrame(playGame);
+    myReq = requestAnimationFrame(playGame);
+  }
+  if(setting.score > 19999 && setting.score < 20005){
+    stopGame();
+    firstSpeakWithAngry();
+    speakWitchAngry.then(() => {
+      numSpeak++;
+      setTimeout(() => {
+        // После 5 сек. добавляем кнопку
+        dialogArea.appendChild(btnReady);
+        btnReady.textContent = 'Ехать дальше';
+        // И обработчик клика по ней
+        btnReady.addEventListener('click', () => {
+          // Очищаем диалог
+          dialogArea.innerHTML = ' ';
+          // Очищаем фон
+          dialogArea.style.display = 'none';
+          enemyBoss.style.display = 'none';
+          // Нажатие на Enter
+          continueGame();
+        })
+      }, 1000)
+    });
+    setting.score +=5;
   }
 }
+
+
 
 
 
@@ -220,6 +256,9 @@ function stopRun(e) {
   keys[e.key] = false;
 }
 
+
+
+
 function moveRoad() {
   // Получаем все линии по тегу line
   let lines = document.querySelectorAll('.line');
@@ -233,8 +272,8 @@ function moveRoad() {
     }
   }
 }
-// Движение дороги
-function moveBg() {
+// Движение фона 
+ function moveBg() {
   // Получаем все линии по тегу house
   let houses = document.querySelectorAll('.house');
   for (let key of houses) {
@@ -286,3 +325,32 @@ function moveEnemy() {
     }
   }
 }
+
+// Остановка движения
+
+function stopGame(e = 'Space') {
+  if (e.code === 'Space' || e == 'Space'){
+    // Отменяем анимацию
+    window.cancelAnimationFrame(myReq);
+    // Убираем паузу
+    document.removeEventListener('keydown', stopGame);
+    // Добавляем продолжение игры
+    document.addEventListener('keydown', continueGame);
+  }
+}
+
+
+// Продолжение движения
+
+function continueGame(e = 'Space') {
+  if (e.code === 'Space' || e == 'Space'){
+    // Добавляем старт игры
+    myReq = window.requestAnimationFrame(playGame);
+    // Добавляем паузу
+    document.addEventListener('keydown', stopGame);
+    // Убираем продолжение (потому что ты только что продолжил, йобана) 
+    document.removeEventListener('keydown', continueGame);
+    document.removeEventListener('keydown', enterGame);
+  }
+}
+document.addEventListener('keydown', stopGame);
