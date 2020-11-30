@@ -47,6 +47,36 @@ body{
   overflow: hidden;
 }
 
+
+/* load */
+
+.load{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  background-color: white;
+  z-index: 99;
+}
+
+.hidden {
+  animation-name: fadeOut;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut{
+  100%{
+    visibility: hidden;
+    opacity: 0; 
+  }
+}
+
+/* main */
+
 .game{
   position: relative;
 }
@@ -168,6 +198,45 @@ body{
   margin: 10px;
 }
 
+/* Покупка авто */
+.buyCarWrap {
+  position: absolute;
+  top: 0%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.buyCarWrap span {
+  color: white;
+  font-size: 32px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.buyCar{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 50%;
+  height: 60%;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 15px;
+}
+.buyCarItem {
+  width: 100px;
+  height: 200px;
+  transition: .3s;
+}
+.buyCarItem:hover{
+  width: 120px;
+  height: 240px;
+  background: red;
+}
 /* Изображение босса */
 
 .enemyBoss{

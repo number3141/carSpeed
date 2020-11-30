@@ -1,4 +1,14 @@
-const score = document.querySelector('.score'), // очки
+'use strict'
+
+window.addEventListener('DOMContentLoaded', () => {
+
+  let load = document.querySelector('.load');
+  window.addEventListener('load', () => {
+    load.classList.add('hidden');
+  })
+
+
+  const score = document.querySelector('.score'), // очки
   start = document.querySelector('.start'), // кнопка старта
   gameArea = document.querySelector('.gameArea'), // игровое поле
   car = document.createElement('div'), //авто игрока 
@@ -10,7 +20,7 @@ const score = document.querySelector('.score'), // очки
   // ID функции - прорисовщика
   let myReq, secondMyReq;
 // Массив с рекордами
-let record = [];
+  let record = [];
 
  // Создание элемента босса и диалогового окна
  const enemyBoss = document.createElement('div');
@@ -105,7 +115,54 @@ speakWitchAngry.then(() => {
   }, 1000)
 });
 
+// Покупка машины
+function buyCar(){
+  // Обёртка
+  let buyCarWrap = document.createElement('div');
+  buyCarWrap.classList.add('buyCarWrap')
+  // Машины
+  let buyCar = document.createElement('div');
+  buyCar.classList.add('buyCar');
+  // Текст
+  let buyText = document.createElement('span');
+  // Купить Кнопка
+  let btnBuy = document.createElement('button')
+  btnBuy.textContent = 'Купить';
+  // Каждая машина
+  for(let i = 1; i < 3; i++){
+    let buyCarItem = document.createElement('div');
+    buyCarItem.classList.add('buyCarItem');
+    buyCarItem.style.background = `transparent url('./image/car/${i}.png') center / cover no-repeat`;
+    console.log('Запушил!');
+    buyCar.appendChild(buyCarItem);
+    //Клик по машине
+    buyCar.addEventListener('click', function checkItem(e){
+      console.log(e.target);
+      // Добавляем обводку к выбранной машине
+      let shopCar = e.target;
+      shopCar.style.border = '2px solid green';
+      // Добавляем кнопку
+      buyCarWrap.appendChild(btnBuy);
+      // Добавляем обработчик на кнопку "Купить"
+      btnBuy.addEventListener('click', function(){
+        car.style.background = shopCar.style.background;
+        console.log(car.style.background);
+        buyCarWrap.style.display = 'none';
+      });
+      // Удаляем обработчик
+      buyCar.removeEventListener('click', checkItem);
 
+    })
+  }
+  buyText.textContent = 'Купить машину';
+  buyCarWrap.appendChild(buyText);
+  buyCarWrap.appendChild(buyCar);
+  document.body.appendChild(buyCarWrap);
+
+
+}
+// Вызов функции проверки машины
+// buyCar();
 
 // Фоновая музыка
 
@@ -354,3 +411,6 @@ function continueGame(e = 'Space') {
   }
 }
 document.addEventListener('keydown', stopGame);
+
+
+})
