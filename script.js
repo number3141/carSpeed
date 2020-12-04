@@ -126,31 +126,36 @@ function buyCar(){
   // Текст
   let buyText = document.createElement('span');
   // Купить Кнопка
-  let btnBuy = document.createElement('button')
+  let btnBuy = document.createElement('button');
+  btnBuy.classList.add('btnBuy');
   btnBuy.textContent = 'Купить';
+  // Массив с машинами(чтобы удалять border)
+  let carArray = [];
   // Каждая машина
   for(let i = 1; i < 3; i++){
+
     let buyCarItem = document.createElement('div');
     buyCarItem.classList.add('buyCarItem');
     buyCarItem.style.background = `transparent url('./image/car/${i}.png') center / cover no-repeat`;
-    console.log('Запушил!');
     buyCar.appendChild(buyCarItem);
+    carArray.push(buyCarItem);
     //Клик по машине
-    buyCar.addEventListener('click', function checkItem(e){
-      console.log(e.target);
+    buyCarItem.addEventListener('click', function checkItem(e){
+      //Убираем обводку с отстальных машин
+      carArray.forEach(item => {
+        item.style.border = 'none';
+      })
       // Добавляем обводку к выбранной машине
-      let shopCar = e.target;
-      shopCar.style.border = '2px solid green';
-      // Добавляем кнопку
-      buyCarWrap.appendChild(btnBuy);
+        let shopCar = e.target;
+        shopCar.style.border = '2px solid green';
       // Добавляем обработчик на кнопку "Купить"
-      btnBuy.addEventListener('click', function(){
-        car.style.background = shopCar.style.background;
-        console.log(car.style.background);
-        buyCarWrap.style.display = 'none';
+        btnBuy.addEventListener('click', function(){
+          // По кнопке купить машина игрока меняется на ту, что выбрал
+          car.style.background = shopCar.style.background;
+          buyCarWrap.style.display = 'none';
       });
-      // Удаляем обработчик
-      buyCar.removeEventListener('click', checkItem);
+      // Добавляем кнопку
+      buyCar.appendChild(btnBuy);
 
     })
   }
@@ -158,11 +163,9 @@ function buyCar(){
   buyCarWrap.appendChild(buyText);
   buyCarWrap.appendChild(buyCar);
   document.body.appendChild(buyCarWrap);
-
-
 }
-// Вызов функции проверки машины
-// buyCar();
+// Вызов функции покупки машины
+buyCar();
 
 // Фоновая музыка
 
