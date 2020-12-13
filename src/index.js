@@ -1,6 +1,9 @@
 'use strict'
+import * as garage from './garage.js'; // Гараж
+
 
 window.addEventListener('DOMContentLoaded', () => {
+
 
   let load = document.querySelector('.load');
   window.addEventListener('load', () => {
@@ -15,7 +18,14 @@ window.addEventListener('DOMContentLoaded', () => {
   rec = document.querySelector('.record'), //авто противников 
   complexity = document.querySelector('.complexity'), //поле выбора сложности
   bgArea = document.querySelector('.backgroundArea'), //фон с домиками
-  compRange = document.querySelector('#complexityRange'); //Range выбора сложности 
+  compRange = document.querySelector('#complexityRange'), //Range выбора сложности 
+  garageBtn = document.querySelector('.btnGarage'), //Кнопка "Открыть гараж"
+  btnGarageClose = document.querySelector('.btnGarageClose'), //Кнопка "Закрыть гараж"
+  garageWrap = document.querySelector('.garage'), //Гараж (модалка)
+  garageWrapCar = document.querySelector('.garage__wrap'); //Гараж (обёртка для машин)
+
+  garageBtn.addEventListener('click', () => garage.openGarage(garageWrap));
+  btnGarageClose.addEventListener('click', () => garage.closeGarage(garageWrap));
 
   // ID функции - прорисовщика
   let myReq, secondMyReq;
@@ -133,7 +143,6 @@ function buyCar(){
   let carArray = [];
   // Каждая машина
   for(let i = 1; i < 3; i++){
-
     let buyCarItem = document.createElement('div');
     buyCarItem.classList.add('buyCarItem');
     buyCarItem.style.background = `transparent url('./image/car/${i}.png') center / cover no-repeat`;
@@ -153,10 +162,11 @@ function buyCar(){
           // По кнопке купить машина игрока меняется на ту, что выбрал
           car.style.background = shopCar.style.background;
           buyCarWrap.style.display = 'none';
+          // Добавляем машину в гараж
+          garage.addCarInGarage(car, garageWrapCar);
       });
       // Добавляем кнопку
       buyCar.appendChild(btnBuy);
-
     })
   }
   buyText.textContent = 'Купить машину';
@@ -183,7 +193,6 @@ function stopSound() {
 function startGame() {
 
   // playSound()
-
   // Скрываем сложность и "Нажатие на старт"
   complexity.classList.add('hide');
   start.classList.add('hide');

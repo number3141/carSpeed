@@ -1,0 +1,34 @@
+{
+  "name": "need-for-js.part2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server",
+    "build": "babel src -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/number3141/needForJS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/number3141/needForJS/issues"
+  },
+  "homepage": "https://github.com/number3141/needForJS#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.10",
+    "babel-preset-es2015": "^6.24.1",
+    "css-loader": "^5.0.1",
+    "http-server": "^0.12.3",
+    "imagemin-webp-webpack-plugin": "^3.3.3",
+    "webpack": "^5.10.1",
+    "webpack-cli": "^4.2.0"
+  },
+  "dependencies": {
+    "style-loader": "^2.0.0"
+  },
+  "description": ""
+}
