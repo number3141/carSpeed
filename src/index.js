@@ -1,8 +1,9 @@
 'use strict'
 import * as garage from './garage.js'; // Гараж
+import * as speakWithBoss from './speakWithBoss'; //диалог с Боссом
 
 
-window.addEventListener('DOMContentLoaded', () => {
+
 
 
   let load = document.querySelector('.load');
@@ -11,7 +12,7 @@ window.addEventListener('DOMContentLoaded', () => {
   })
 
 
-  const score = document.querySelector('.score'), // очки
+ export const score = document.querySelector('.score'), // очки
   start = document.querySelector('.start'), // кнопка старта
   gameArea = document.querySelector('.gameArea'), // игровое поле
   car = document.createElement('div'), //авто игрока 
@@ -24,6 +25,7 @@ window.addEventListener('DOMContentLoaded', () => {
   garageWrap = document.querySelector('.garage'), //Гараж (модалка)
   garageWrapCar = document.querySelector('.garage__wrap'); //Гараж (обёртка для машин)
 
+
   garageBtn.addEventListener('click', () => garage.openGarage(garageWrap));
   btnGarageClose.addEventListener('click', () => garage.closeGarage(garageWrap));
 
@@ -33,17 +35,18 @@ window.addEventListener('DOMContentLoaded', () => {
   let record = [];
 
  // Создание элемента босса и диалогового окна
- const enemyBoss = document.createElement('div');
- const dialogArea = document.createElement('div');
+ export const enemyBoss = document.createElement('div');
+          enemyBoss.classList.add('enemyBoss');
+          // Окно
+ export const dialogArea = document.createElement('div');
  bgArea.appendChild(dialogArea);
- const btnReady = document.createElement('button');
-
+ export const btnReady = document.createElement('button');
 // Фоновая песня (Пока что просто объект Audio)
 let audio = new Audio();
 
 car.classList.add('car');
 // Начало по нажатии на Enter 
-function enterGame(e) {
+export function enterGame(e) {
   if (e.code === 'Enter') {
     startGame();
   }
@@ -66,63 +69,10 @@ const setting = {
   traffic: 3
 };
 
-// Массив с фразами антагониста
-let numSpeak = 0;
-let firstSpeakWithAngry;
-
-const speakAngryBoss = [
-  ['Эй, придурок. Мне сказали, ты хочешь бросить вызов моим парням? Думаешь, мы дадим шанс какому-то выскочке? Для начала набери 20 000 очков чтобы показать себя'],
-  ['Неплохо, придурок, но для нас ты всё равно лох']
-]
-
-
-
-  // Стартовый диалог со злодеем 
-  let speakWitchAngry = new Promise(function(resolve, reject){
-    firstSpeakWithAngry = function() {
-    dialogArea.classList.add('dialogArea');
-    enemyBoss.classList.add('enemyBoss');
-    enemyBoss.style.display = 'block';
-    dialogArea.style.display = 'block';
-    bgArea.appendChild(dialogArea);
-    bgArea.appendChild(enemyBoss);
-    // Плавное появление букв
-    let speak = speakAngryBoss[numSpeak].toString();
-    let arr = speak.split('');
-    console.log(numSpeak)
-    // Скорость появления букв
-    let i = 0.02;
-    arr.map((key) => {
-      let span = document.createElement('span');
-      span.textContent = key;
-      span.style.animation = `1s ghost ${i}s forwards`;
-      i += 0.02;
-      resolve(dialogArea.appendChild(span));
-  })
-}
-firstSpeakWithAngry()
-
-})
-
-// Когда диалог с боссом закончился 
-
-speakWitchAngry.then(() => {
-  numSpeak++;
-  setTimeout(() => {
-    // После 5 сек. добавляем кнопку
-    dialogArea.appendChild(btnReady);
-    btnReady.textContent = 'Начать';
-    // И обработчик клика по ней
-    btnReady.addEventListener('click', () => {
-      // Очищаем диалог
-      dialogArea.innerHTML = ' ';
-      // Очищаем фон
-      dialogArea.style.display = 'none';
-      enemyBoss.style.display = 'none';
-      // Нажатие на Enter
-      document.addEventListener('keydown', enterGame);
-    })
-  }, 1000)
+let speakWitchAngry = new Promise((resolve, reject) => {
+  speakWithBoss.firstSpeakWithAngry()
+}).then(() => {  // Когда диалог с боссом закончился 
+  speakWitchAngry.addBtnSpeakBoss();
 });
 
 // Покупка машины
@@ -287,7 +237,7 @@ function playGame() {
   }
   if(setting.score > 19999 && setting.score < 20005){
     stopGame();
-    firstSpeakWithAngry();
+    // firstSpeakWithAngry();
     speakWitchAngry.then(() => {
       numSpeak++;
       setTimeout(() => {
@@ -423,6 +373,3 @@ function continueGame(e = 'Space') {
   }
 }
 document.addEventListener('keydown', stopGame);
-
-
-})

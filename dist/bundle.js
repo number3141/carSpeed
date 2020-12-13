@@ -1,1 +1,626 @@
-(()=>{"use strict";const e=function(e,t){let n=e.cloneNode();return t.appendChild(n)};window.addEventListener("DOMContentLoaded",(()=>{let t=document.querySelector(".load");window.addEventListener("load",(()=>{t.classList.add("hidden")}));const n=document.querySelector(".score"),o=document.querySelector(".start"),d=document.querySelector(".gameArea"),r=document.createElement("div"),l=document.querySelector(".record"),s=document.querySelector(".complexity"),c=document.querySelector(".backgroundArea"),a=document.querySelector("#complexityRange"),i=document.querySelector(".btnGarage"),p=document.querySelector(".btnGarageClose"),u=document.querySelector(".garage"),y=document.querySelector(".garage__wrap");let m;i.addEventListener("click",(()=>{return(e=u).style.visibility="inherit",e.style.opacity="1",void console.log("Открыл");var e})),p.addEventListener("click",(()=>{return(e=u).style.visibility="hidden",e.style.opacity="0",void console.log("Закрыл");var e}));let f=[];const h=document.createElement("div"),v=document.createElement("div");c.appendChild(v);const L=document.createElement("button");let g=new Audio;function E(e){"Enter"===e.code&&function(){s.classList.add("hide"),o.classList.add("hide"),document.removeEventListener("keydown",E),x.speed=+a.value,x.start=!0,d.innerHTML="",c.innerHTML="",r.style.left="125px",r.style.top="80%";for(let e=0;e<10;e++){const t=document.createElement("div");t.classList.add("line"),t.style.top=80*e+"px",t.y=82*e,d.appendChild(t)}for(let e=0;e<5;e++){const t=document.createElement("div");t.classList.add("house"),t.style.backgroundImage='url("./image/home.webp")',t.style.top=82*e*-1+"px";let n=Math.random()*(c.offsetWidth-100);(n>900||n<400)&&(t.style.left=n+"px"),t.y=120*e,c.appendChild(t)}for(let e=1;e<4;e++){const t=document.createElement("div");t.classList.add("enemy"),t.style.top=100*e+"px",t.y=-100*x.traffic*e+1,console.log(t.y),t.style.top=t.y+"px",t.style.left=Math.random()*(d.offsetWidth-50)+"px",d.appendChild(t)}x.score=0,d.appendChild(r),x.x=r.offsetLeft,x.y=r.offsetTop,A()}()}r.classList.add("car"),document.addEventListener("keydown",(function(e){e.preventDefault(),w[e.key]=!0})),document.addEventListener("keyup",(function(e){w[e.key]=!1}));const w={ArrowUp:!1,ArrowDown:!1,ArrowRight:!1,ArrowLeft:!1},x={start:!1,score:0,speed:0,traffic:3};let C,k=0;const b=[["Эй, придурок. Мне сказали, ты хочешь бросить вызов моим парням? Думаешь, мы дадим шанс какому-то выскочке? Для начала набери 20 000 очков чтобы показать себя"],["Неплохо, придурок, но для нас ты всё равно лох"]];let S=new Promise((function(e,t){C=function(){v.classList.add("dialogArea"),h.classList.add("enemyBoss"),h.style.display="block",v.style.display="block",c.appendChild(v),c.appendChild(h);let t=b[k].toString().split("");console.log(k);let n=.02;t.map((t=>{let o=document.createElement("span");o.textContent=t,o.style.animation=`1s ghost ${n}s forwards`,n+=.02,e(v.appendChild(o))}))},C()}));function A(){x.start&&(x.score+=x.speed,n.textContent=x.score,function(){let e=document.querySelectorAll(".line");for(let t of e)t.y+=x.speed,t.style.top=t.y+"px",parseInt(t.style.top)>d.offsetHeight&&(t.y=-82)}(),function(){let e=document.querySelectorAll(".enemy");for(let t of e){let e=r.getBoundingClientRect(),n=t.getBoundingClientRect();if(e.top<n.bottom&&e.right>n.left&&e.left<n.right&&e.bottom>n.top&&(x.start=!1,o.classList.remove("hide"),s.classList.remove("hide"),g.pause(),g.currentTime=0,f.push(x.score),l.innerHTML="Рекорд = "+Math.max(...f),document.addEventListener("keydown",E)),t.y+=x.speed,t.style.top=t.y+"px",t.y>document.documentElement.clientHeight){t.y=-100*x.traffic,t.style.left=Math.random()*(d.offsetWidth-50)+"px";let e=Math.round(3*Math.random())+1;t.style.background=`url('./image/enemy/${e}.webp') center / cover no-repeat`}}}(),function(){let e=document.querySelectorAll(".house");for(let t of e)if(t.y+=x.speed,t.style.top=t.y+"px",parseInt(t.style.top)>d.offsetHeight){t.y=-120;let e=Math.random()*(c.offsetWidth-100);(e>900||e<400)&&(t.style.left=e+"px")}}(),w.ArrowLeft&&x.x>0&&(x.x-=x.speed),w.ArrowRight&&x.x<d.offsetWidth-r.offsetWidth&&(x.x+=x.speed),w.ArrowUp&&x.y>0&&(x.y-=x.speed),w.ArrowDown&&x.y<d.offsetHeight-r.offsetHeight&&(x.y+=x.speed),r.style.left=x.x+"px",r.style.top=x.y+"px",m=requestAnimationFrame(A)),x.score>19999&&x.score<20005&&(q(),C(),S.then((()=>{k++,setTimeout((()=>{v.appendChild(L),L.textContent="Ехать дальше",L.addEventListener("click",(()=>{v.innerHTML=" ",v.style.display="none",h.style.display="none",M()}))}),1e3)})),x.score+=5)}function q(e="Space"){"Space"!==e.code&&"Space"!=e||(window.cancelAnimationFrame(m),document.removeEventListener("keydown",q),document.addEventListener("keydown",M))}function M(e="Space"){"Space"!==e.code&&"Space"!=e||(m=window.requestAnimationFrame(A),document.addEventListener("keydown",q),document.removeEventListener("keydown",M),document.removeEventListener("keydown",E))}S.then((()=>{k++,setTimeout((()=>{v.appendChild(L),L.textContent="Начать",L.addEventListener("click",(()=>{v.innerHTML=" ",v.style.display="none",h.style.display="none",document.addEventListener("keydown",E)}))}),1e3)})),function(){let t=document.createElement("div");t.classList.add("buyCarWrap");let n=document.createElement("div");n.classList.add("buyCar");let o=document.createElement("span"),d=document.createElement("button");d.classList.add("btnBuy"),d.textContent="Купить";let l=[];for(let o=1;o<3;o++){let s=document.createElement("div");s.classList.add("buyCarItem"),s.style.background=`transparent url('./image/car/${o}.png') center / cover no-repeat`,n.appendChild(s),l.push(s),s.addEventListener("click",(function(o){l.forEach((e=>{e.style.border="none"}));let s=o.target;s.style.border="2px solid green",d.addEventListener("click",(function(){r.style.background=s.style.background,t.style.display="none",e(r,y)})),n.appendChild(d)}))}o.textContent="Купить машину",t.appendChild(o),t.appendChild(n),document.body.appendChild(t)}(),document.addEventListener("keydown",q)}))})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/garage.js":
+/*!***********************!*\
+  !*** ./src/garage.js ***!
+  \***********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "openGarage": () => /* binding */ openGarage,
+/* harmony export */   "closeGarage": () => /* binding */ closeGarage,
+/* harmony export */   "addCarInGarage": () => /* binding */ addCarInGarage
+/* harmony export */ });
+
+
+// Открыть гараж
+
+const openGarage = function(modal){
+  modal.style.visibility = 'inherit';
+  modal.style.opacity = '1';
+  console.log('Открыл');
+}
+
+// Закрыть гараж
+
+const closeGarage = function(modal){
+  modal.style.visibility = 'hidden';
+  modal.style.opacity = '0';
+  console.log('Закрыл');
+}
+
+
+// Добавить машину в гараж 
+
+const addCarInGarage = function(car, modal){
+  let item = car.cloneNode();
+  modal.appendChild(item);
+  console.log('Добавил');
+}
+
+/***/ }),
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "score": () => /* binding */ score,
+/* harmony export */   "start": () => /* binding */ start,
+/* harmony export */   "gameArea": () => /* binding */ gameArea,
+/* harmony export */   "car": () => /* binding */ car,
+/* harmony export */   "rec": () => /* binding */ rec,
+/* harmony export */   "complexity": () => /* binding */ complexity,
+/* harmony export */   "bgArea": () => /* binding */ bgArea,
+/* harmony export */   "compRange": () => /* binding */ compRange,
+/* harmony export */   "garageBtn": () => /* binding */ garageBtn,
+/* harmony export */   "btnGarageClose": () => /* binding */ btnGarageClose,
+/* harmony export */   "garageWrap": () => /* binding */ garageWrap,
+/* harmony export */   "garageWrapCar": () => /* binding */ garageWrapCar,
+/* harmony export */   "enemyBoss": () => /* binding */ enemyBoss,
+/* harmony export */   "dialogArea": () => /* binding */ dialogArea,
+/* harmony export */   "btnReady": () => /* binding */ btnReady,
+/* harmony export */   "enterGame": () => /* binding */ enterGame
+/* harmony export */ });
+/* harmony import */ var _garage_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./garage.js */ "./src/garage.js");
+/* harmony import */ var _speakWithBoss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./speakWithBoss */ "./src/speakWithBoss.js");
+
+; // Гараж
+ //диалог с Боссом
+
+
+
+
+
+  let load = document.querySelector('.load');
+  window.addEventListener('load', () => {
+    load.classList.add('hidden');
+  })
+
+
+ const score = document.querySelector('.score'), // очки
+  start = document.querySelector('.start'), // кнопка старта
+  gameArea = document.querySelector('.gameArea'), // игровое поле
+  car = document.createElement('div'), //авто игрока 
+  rec = document.querySelector('.record'), //авто противников 
+  complexity = document.querySelector('.complexity'), //поле выбора сложности
+  bgArea = document.querySelector('.backgroundArea'), //фон с домиками
+  compRange = document.querySelector('#complexityRange'), //Range выбора сложности 
+  garageBtn = document.querySelector('.btnGarage'), //Кнопка "Открыть гараж"
+  btnGarageClose = document.querySelector('.btnGarageClose'), //Кнопка "Закрыть гараж"
+  garageWrap = document.querySelector('.garage'), //Гараж (модалка)
+  garageWrapCar = document.querySelector('.garage__wrap'); //Гараж (обёртка для машин)
+
+
+  garageBtn.addEventListener('click', () => _garage_js__WEBPACK_IMPORTED_MODULE_0__.openGarage(garageWrap));
+  btnGarageClose.addEventListener('click', () => _garage_js__WEBPACK_IMPORTED_MODULE_0__.closeGarage(garageWrap));
+
+  // ID функции - прорисовщика
+  let myReq, secondMyReq;
+// Массив с рекордами
+  let record = [];
+
+ // Создание элемента босса и диалогового окна
+ const enemyBoss = document.createElement('div');
+          enemyBoss.classList.add('enemyBoss');
+          // Окно
+ const dialogArea = document.createElement('div');
+ bgArea.appendChild(dialogArea);
+ const btnReady = document.createElement('button');
+// Фоновая песня (Пока что просто объект Audio)
+let audio = new Audio();
+
+car.classList.add('car');
+// Начало по нажатии на Enter 
+function enterGame(e) {
+  if (e.code === 'Enter') {
+    startGame();
+  }
+}
+
+document.addEventListener('keydown', startRun);
+document.addEventListener('keyup', stopRun);
+
+const keys = {
+  ArrowUp: false,
+  ArrowDown: false,
+  ArrowRight: false,
+  ArrowLeft: false
+};
+
+const setting = {
+  start: false,
+  score: 0,
+  speed: 0,
+  traffic: 3
+};
+
+let speakWitchAngry = new Promise((resolve, reject) => {
+  _speakWithBoss__WEBPACK_IMPORTED_MODULE_1__.firstSpeakWithAngry()
+}).then(() => {  // Когда диалог с боссом закончился 
+  speakWitchAngry.addBtnSpeakBoss();
+});
+
+// Покупка машины
+function buyCar(){
+  // Обёртка
+  let buyCarWrap = document.createElement('div');
+  buyCarWrap.classList.add('buyCarWrap')
+  // Машины
+  let buyCar = document.createElement('div');
+  buyCar.classList.add('buyCar');
+  // Текст
+  let buyText = document.createElement('span');
+  // Купить Кнопка
+  let btnBuy = document.createElement('button');
+  btnBuy.classList.add('btnBuy');
+  btnBuy.textContent = 'Купить';
+  // Массив с машинами(чтобы удалять border)
+  let carArray = [];
+  // Каждая машина
+  for(let i = 1; i < 3; i++){
+    let buyCarItem = document.createElement('div');
+    buyCarItem.classList.add('buyCarItem');
+    buyCarItem.style.background = `transparent url('./image/car/${i}.png') center / cover no-repeat`;
+    buyCar.appendChild(buyCarItem);
+    carArray.push(buyCarItem);
+    //Клик по машине
+    buyCarItem.addEventListener('click', function checkItem(e){
+      //Убираем обводку с отстальных машин
+      carArray.forEach(item => {
+        item.style.border = 'none';
+      })
+      // Добавляем обводку к выбранной машине
+        let shopCar = e.target;
+        shopCar.style.border = '2px solid green';
+      // Добавляем обработчик на кнопку "Купить"
+        btnBuy.addEventListener('click', function(){
+          // По кнопке купить машина игрока меняется на ту, что выбрал
+          car.style.background = shopCar.style.background;
+          buyCarWrap.style.display = 'none';
+          // Добавляем машину в гараж
+          _garage_js__WEBPACK_IMPORTED_MODULE_0__.addCarInGarage(car, garageWrapCar);
+      });
+      // Добавляем кнопку
+      buyCar.appendChild(btnBuy);
+    })
+  }
+  buyText.textContent = 'Купить машину';
+  buyCarWrap.appendChild(buyText);
+  buyCarWrap.appendChild(buyCar);
+  document.body.appendChild(buyCarWrap);
+}
+// Вызов функции покупки машины
+buyCar();
+
+// Фоновая музыка
+
+
+function playSound() {
+  audio.src = './audio/1.mp3'; // Указываем путь к звуку "клика"
+  audio.autoplay = true; // Автоматически запускаем
+}
+
+function stopSound() {
+  audio.pause();
+  audio.currentTime = 0.0;
+}
+
+function startGame() {
+
+  // playSound()
+  // Скрываем сложность и "Нажатие на старт"
+  complexity.classList.add('hide');
+  start.classList.add('hide');
+  // Убираем нажатие на Enter 
+  document.removeEventListener('keydown', enterGame);
+  // Скорость = выбранная сложность
+  setting.speed = +compRange.value;
+
+  setting.start = true;
+  // Очищаем игровое поле перед стартом игры
+  gameArea.innerHTML = '';
+  bgArea.innerHTML = '';
+
+  car.style.left = 125 + 'px';
+  car.style.top = 80 + '%';
+
+  // Полосы(имитация дороги)
+  for (let i = 0; i < 10; i++) {
+    const line = document.createElement('div');
+    line.classList.add('line');
+    // Позиции каждой черты(не путать с движением. Это просто расположение)
+    line.style.top = i * 80 + 'px';
+    // .y понадобится для движения дороги
+    line.y = i * 82;
+    gameArea.appendChild(line);
+  }
+
+  // Фон
+  for (let i = 0; i < 5; i++) {
+    const house = document.createElement('div');
+    house.classList.add('house');
+    house.style.backgroundImage = 'url("./image/home.webp")';
+    // Позиции каждой черты(не путать с движением. Это просто расположение)
+    house.style.top = (i * 82) * -1 + 'px';
+    let ans = Math.random() * (bgArea.offsetWidth - 100);
+    if (ans > 900 || ans < 400) {
+      house.style.left = ans + 'px';
+    }
+    // .y понадобится для движения дороги
+    house.y = i * 120;
+    bgArea.appendChild(house);
+  }
+
+
+  // Движение машин
+  for (let i = 1; i < 4; i++) {
+    const enemy = document.createElement('div');
+    enemy.classList.add('enemy');
+    enemy.style.top = (i * 100) + 'px';
+    // Больше значение трафика - дольше друг от друга машины
+    enemy.y = -1 * 100 * setting.traffic * i + 1;
+    console.log(enemy.y)
+    enemy.style.top = enemy.y + 'px';
+    // По оси Х рандомное расположение 
+    enemy.style.left = Math.random() * (gameArea.offsetWidth - 50) + 'px';
+    gameArea.appendChild(enemy);
+  }
+  // Сброс очков 
+  setting.score = 0;
+  // Добавление авто
+  gameArea.appendChild(car);
+  // Фиксирование позиции авто 
+  setting.x = car.offsetLeft;
+  setting.y = car.offsetTop;
+  playGame();
+}
+
+function playGame() {
+  if (setting.start) {
+    
+    setting.score += setting.speed;
+    score.textContent = setting.score;
+    moveRoad();
+    moveEnemy();
+    moveBg();
+    if (keys.ArrowLeft && setting.x > 0) {
+      setting.x -= setting.speed;
+    }
+    if (keys.ArrowRight && setting.x < (gameArea.offsetWidth - car.offsetWidth)) {
+      setting.x += setting.speed;
+    }
+    if (keys.ArrowUp && setting.y > 0) {
+      setting.y -= setting.speed;
+    }
+    if (keys.ArrowDown && setting.y < (gameArea.offsetHeight - car.offsetHeight)) {
+      setting.y += setting.speed;
+    }
+    car.style.left = setting.x + 'px';
+    car.style.top = setting.y + 'px';
+    // Функция повторяет прорисовку самой себя
+    myReq = requestAnimationFrame(playGame);
+  }
+  if(setting.score > 19999 && setting.score < 20005){
+    stopGame();
+    // firstSpeakWithAngry();
+    speakWitchAngry.then(() => {
+      numSpeak++;
+      setTimeout(() => {
+        // После 5 сек. добавляем кнопку
+        dialogArea.appendChild(btnReady);
+        btnReady.textContent = 'Ехать дальше';
+        // И обработчик клика по ней
+        btnReady.addEventListener('click', () => {
+          // Очищаем диалог
+          dialogArea.innerHTML = ' ';
+          // Очищаем фон
+          dialogArea.style.display = 'none';
+          enemyBoss.style.display = 'none';
+          // Нажатие на Enter
+          continueGame();
+        })
+      }, 1000)
+    });
+    setting.score +=5;
+  }
+}
+
+
+
+
+
+// Если нажата кнопка - её значение в массиве становится true 
+// и срабатывает обработчик по движению в опр. сторону
+function startRun(e) {
+  e.preventDefault();
+  keys[e.key] = true;
+}
+
+function stopRun(e) {
+  keys[e.key] = false;
+}
+
+
+
+
+function moveRoad() {
+  // Получаем все линии по тегу line
+  let lines = document.querySelectorAll('.line');
+  for (let key of lines) {
+    // Каждой линии прибавляем скорость движения и пробрасываем в стили через .у
+    key.y += setting.speed;
+    key.style.top = key.y + 'px';
+    // Если отступ линии сверзу больше, чем игровое поле - линия уходит наверх
+    if (parseInt(key.style.top) > (gameArea.offsetHeight)) {
+      key.y = -82;
+    }
+  }
+}
+// Движение фона 
+ function moveBg() {
+  // Получаем все линии по тегу house
+  let houses = document.querySelectorAll('.house');
+  for (let key of houses) {
+    // Каждой линии прибавляем скорость движения и пробрасываем в стили через .у
+    key.y += setting.speed;
+    key.style.top = key.y + 'px';
+    // Если отступ линии сверзу больше, чем игровое поле - линия уходит наверх
+    if (parseInt(key.style.top) > (gameArea.offsetHeight)) {
+      key.y = -120;
+      // Положение по X  - полная ширина минус ширина элемента
+      let ans = Math.random() * (bgArea.offsetWidth - 100);
+      if (ans > 900 || ans < 400) {
+        key.style.left = ans + 'px';
+      }
+    }
+  }
+}
+
+function moveEnemy() {
+  let enemys = document.querySelectorAll('.enemy');
+  // Получение позиции авто и противников
+  for (let key of enemys) {
+    // Получаем позицию авто игрока и противников 
+    let carRect = car.getBoundingClientRect();
+    let enemyRect = key.getBoundingClientRect();
+    // Если координаты перескаются - событие окончания игры
+    if (carRect.top < enemyRect.bottom && carRect.right > enemyRect.left &&
+      carRect.left < enemyRect.right && carRect.bottom > enemyRect.top) {
+      setting.start = false;
+      start.classList.remove('hide');
+      complexity.classList.remove('hide');
+      // Останавливаем песню
+      stopSound();
+      // Добавляем рекорд в массив и выводим в div
+      record.push(setting.score);
+      rec.innerHTML = 'Рекорд = ' + Math.max(...record);
+      // Возвращаем нажатие на Enter
+      document.addEventListener('keydown', enterGame);
+    }
+    // Прибавляем каждой машине скорость и пробрасываем в стили с помощью .y
+    key.y += setting.speed;
+    key.style.top = key.y + 'px';
+    // Если мащина ушла вниз - пробрасываем наверх с изменением позиции по X 
+    if (key.y > document.documentElement.clientHeight) {
+      key.y = -100 * setting.traffic;
+      key.style.left = Math.random() * (gameArea.offsetWidth - 50) + 'px';
+      let im = Math.round(Math.random() * 3) + 1;
+      key.style.background = `url('./image/enemy/${im}.webp') center / cover no-repeat`;
+    }
+  }
+}
+
+// Остановка движения
+
+function stopGame(e = 'Space') {
+  if (e.code === 'Space' || e == 'Space'){
+    // Отменяем анимацию
+    window.cancelAnimationFrame(myReq);
+    // Убираем паузу
+    document.removeEventListener('keydown', stopGame);
+    // Добавляем продолжение игры
+    document.addEventListener('keydown', continueGame);
+  }
+}
+
+
+// Продолжение движения
+
+function continueGame(e = 'Space') {
+  if (e.code === 'Space' || e == 'Space'){
+    // Добавляем старт игры
+    myReq = window.requestAnimationFrame(playGame);
+    // Добавляем паузу
+    document.addEventListener('keydown', stopGame);
+    // Убираем продолжение (потому что ты только что продолжил, йобана) 
+    document.removeEventListener('keydown', continueGame);
+    document.removeEventListener('keydown', enterGame);
+  }
+}
+document.addEventListener('keydown', stopGame);
+
+
+/***/ }),
+
+/***/ "./src/speakWithBoss.js":
+/*!******************************!*\
+  !*** ./src/speakWithBoss.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "firstSpeakWithAngry": () => /* binding */ firstSpeakWithAngry
+/* harmony export */ });
+/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index */ "./src/index.js");
+
+
+// Массив с фразами антагониста
+let numSpeak = 0;
+
+const speakAngryBoss = [
+  ['Эй, придурок. Мне сказали, ты хочешь бросить вызов моим парням? Думаешь, мы дадим шанс какому-то выскочке? Для начала набери 20 000 очков чтобы показать себя'],
+  ['Неплохо, придурок, но для нас ты всё равно лох']
+]
+
+
+
+
+  // Стартовый диалог со злодеем 
+const firstSpeakWithAngry = function(dialogWrap = _index__WEBPACK_IMPORTED_MODULE_0__.dialogArea, boss = _index__WEBPACK_IMPORTED_MODULE_0__.enemyBoss, bgAreaSec = _index__WEBPACK_IMPORTED_MODULE_0__.bgArea, btnReadySec = _index__WEBPACK_IMPORTED_MODULE_0__.btnReady){
+    dialogWrap.classList.add('dialogArea');
+    boss.style.display = 'block';
+    dialogWrap.style.display = 'block';
+    bgAreaSec.appendChild(_index__WEBPACK_IMPORTED_MODULE_0__.dialogArea);
+    bgAreaSec.appendChild(_index__WEBPACK_IMPORTED_MODULE_0__.enemyBoss);
+    // Плавное появление букв
+    let speak = speakAngryBoss[numSpeak].toString();
+    let arr = speak.split('');
+
+    // Скорость появления букв
+    let i = 0.02;
+    arr.map((key) => {
+      let span = document.createElement('span');
+      span.textContent = key;
+      span.style.animation = `1s ghost ${i}s forwards`;
+      i += 0.02;
+      _index__WEBPACK_IMPORTED_MODULE_0__.dialogArea.appendChild(span);
+})
+
+console.log('Работаю')
+  numSpeak++;
+  setTimeout(() => {
+    // После 1 сек. добавляем кнопку
+    dialogWrap.appendChild(btnReadySec);
+    btnReadySec.textContent = 'Начать';
+    // И обработчик клика по ней
+    btnReadySec.addEventListener('click', () => {
+      // Очищаем диалог
+      dialogWrap.innerHTML = ' ';
+      // Очищаем фон
+      dialogWrap.style.display = 'none';
+      boss.style.display = 'none';
+      // Нажатие на Enter
+      document.addEventListener('keydown', _index__WEBPACK_IMPORTED_MODULE_0__.enterGame);
+    })
+  }, 1000)
+
+}
+
+
+
+// (dialogWrap = dialogArea, boss = enemyBoss, bgAreaSec = bgArea) => {
+//     console.log(dialogWrap)
+//     dialogWrap.classList.add('dialogArea');
+//     boss.style.display = 'block';
+//     dialogWrap.style.display = 'block';
+//     bgAreaSec.appendChild(dialogArea);
+//     bgAreaSec.appendChild(enemyBoss);
+//     // Плавное появление букв
+//     let speak = speakAngryBoss[numSpeak].toString();
+//     let arr = speak.split('');
+
+//     // Скорость появления букв
+//     let i = 0.02;
+//     arr.map((key) => {
+//       let span = document.createElement('span');
+//       span.textContent = key;
+//       span.style.animation = `1s ghost ${i}s forwards`;
+//       i += 0.02;
+//       dialogArea.appendChild(span);
+//   })
+// }
+
+// export const addBtnSpeakBoss = () => {
+//   console.log('Работаю')
+//   numSpeak++;
+//   setTimeout(() => {
+//     // После 1 сек. добавляем кнопку
+//     dialogArea.appendChild(btnReady);
+//     btnReady.textContent = 'Начать';
+//     // И обработчик клика по ней
+//     btnReady.addEventListener('click', () => {
+//       // Очищаем диалог
+//       dialogArea.innerHTML = ' ';
+//       // Очищаем фон
+//       dialogArea.style.display = 'none';
+//       enemyBoss.style.display = 'none';
+//       // Нажатие на Enter
+//       document.addEventListener('keydown', enterGame);
+//     })
+//   }, 1000)
+// }
+
+
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		if(__webpack_module_cache__[moduleId]) {
+/******/ 			return __webpack_module_cache__[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop)
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	// startup
+/******/ 	// Load entry module
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	__webpack_require__("./src/index.js");
+/******/ })()
+;
+//# sourceMappingURL=bundle.js.map
