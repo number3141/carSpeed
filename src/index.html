@@ -1,56 +1,61 @@
 <html>
-  <head>
-    <title>Need for JS</title>
-  </head>
-  <link rel="stylesheet" href="./main.css">
-  <body>
+
+<head>
+  <title>Need for JS</title>
+</head>
+<link rel="stylesheet" href="./main.css">
+
+<body>
 
 
-    <!-- LOADING -->
+  <!-- LOADING -->
 
-    <div class="load">
-      <img src="./image/load.gif" alt="loading">
+  <div class="load">
+    <img src="./image/load.gif" alt="loading">
+  </div>
+
+
+  <div class="game">
+    <!-- Фон с домиками  -->
+    <div class="backgroundArea"></div>
+    <!-- Игровое поле -->
+    <div class="gameArea"></div>
+    <!-- Кнопка старта -->
+    <div class="start">
+      <p>Чтобы начать игру нажми Enter</p>
     </div>
+    <div class="wrap">
+      <!-- Очки -->
+      <div class="score"></div>
+      <!-- Рекорд -->
+      <div class="record"></div>
 
-
-    <div class="game">
-      <!-- Фон с домиками  -->
-      <div class="backgroundArea"></div>
-      <!-- Игровое поле -->
-      <div class="gameArea"></div>
-      <!-- Кнопка старта -->
-      <div class="start"><p>Чтобы начать игру нажми Enter</p></div>
-      <div class="wrap">
-        <!-- Очки -->
-        <div class="score"></div>
-        <!-- Рекорд -->
-        <div class="record"></div>
-
-        <button class="btnGarage">Отркрыть гараж</button>
-
-      </div>
-      <!-- Гараж -->
-
-    </div>
-    <div class="complexity">
-      Выберите сложность
-      <input type="range" min="1" max='5' id="complexityRange">
-
-  <!-- ENEMY -->
-
+      <button class="btnGarage">Отркрыть гараж</button>
 
     </div>
+    <!-- Гараж -->
 
-    <div class="garage">
-      <div class="garage__header">
-        Гараж
-      </div>
-      <div class="garage__wrap">
+  </div>
+  <div class="complexity">
+    Выберите сложность
+    <input type="range" min="1" max='5' id="complexityRange">
 
-      </div>
-      <button class="btnGarageClose">Закрыть гараж</button>
+    <!-- ENEMY -->
+
+
+  </div>
+
+  <div class="garage">
+    <div class="garage__header">
+      Гараж
     </div>
+    <div class="garage__wrap">
 
-    <script src="../dist/bundle.js"></script>
-  </body>
+    </div>
+    <button class="btnGarageClose">Закрыть гараж</button>
+  </div>
+
+  <script src="../dist/bundle.js"></script>
+</body>
+
 </html>

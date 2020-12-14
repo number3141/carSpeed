@@ -1,12 +1,10 @@
 'use strict'
 import * as garage from './garage.js'; // Гараж
 import * as speakWithBoss from './speakWithBoss'; //диалог с Боссом
+import * as carShop from './buyCar' // Покупка машины (массив со всеми машинами)
 
 
-
-
-
-  let load = document.querySelector('.load');
+let load = document.querySelector('.load');
   window.addEventListener('load', () => {
     load.classList.add('hidden');
   })
@@ -25,26 +23,21 @@ import * as speakWithBoss from './speakWithBoss'; //диалог с Боссом
   garageWrap = document.querySelector('.garage'), //Гараж (модалка)
   garageWrapCar = document.querySelector('.garage__wrap'); //Гараж (обёртка для машин)
 
-
-  garageBtn.addEventListener('click', () => garage.openGarage(garageWrap));
-  btnGarageClose.addEventListener('click', () => garage.closeGarage(garageWrap));
-
-  // ID функции - прорисовщика
+// ID функции - прорисовщика
   let myReq, secondMyReq;
 // Массив с рекордами
   let record = [];
 
- // Создание элемента босса и диалогового окна
- export const enemyBoss = document.createElement('div');
-          enemyBoss.classList.add('enemyBoss');
-          // Окно
- export const dialogArea = document.createElement('div');
- bgArea.appendChild(dialogArea);
- export const btnReady = document.createElement('button');
+  // Открытие / Закрытие гаража
+  garageBtn.addEventListener('click', () => garage.openGarage(garageWrap));
+  btnGarageClose.addEventListener('click', () => garage.closeGarage(garageWrap));
+
+ 
 // Фоновая песня (Пока что просто объект Audio)
 let audio = new Audio();
 
 car.classList.add('car');
+
 // Начало по нажатии на Enter 
 export function enterGame(e) {
   if (e.code === 'Enter') {
@@ -69,71 +62,23 @@ const setting = {
   traffic: 3
 };
 
-let speakWitchAngry = new Promise((resolve, reject) => {
-  speakWithBoss.firstSpeakWithAngry()
-}).then(() => {  // Когда диалог с боссом закончился 
-  speakWitchAngry.addBtnSpeakBoss();
-});
+// Разговор с боссом
 
-// Покупка машины
-function buyCar(){
-  // Обёртка
-  let buyCarWrap = document.createElement('div');
-  buyCarWrap.classList.add('buyCarWrap')
-  // Машины
-  let buyCar = document.createElement('div');
-  buyCar.classList.add('buyCar');
-  // Текст
-  let buyText = document.createElement('span');
-  // Купить Кнопка
-  let btnBuy = document.createElement('button');
-  btnBuy.classList.add('btnBuy');
-  btnBuy.textContent = 'Купить';
-  // Массив с машинами(чтобы удалять border)
-  let carArray = [];
-  // Каждая машина
-  for(let i = 1; i < 3; i++){
-    let buyCarItem = document.createElement('div');
-    buyCarItem.classList.add('buyCarItem');
-    buyCarItem.style.background = `transparent url('./image/car/${i}.png') center / cover no-repeat`;
-    buyCar.appendChild(buyCarItem);
-    carArray.push(buyCarItem);
-    //Клик по машине
-    buyCarItem.addEventListener('click', function checkItem(e){
-      //Убираем обводку с отстальных машин
-      carArray.forEach(item => {
-        item.style.border = 'none';
-      })
-      // Добавляем обводку к выбранной машине
-        let shopCar = e.target;
-        shopCar.style.border = '2px solid green';
-      // Добавляем обработчик на кнопку "Купить"
-        btnBuy.addEventListener('click', function(){
-          // По кнопке купить машина игрока меняется на ту, что выбрал
-          car.style.background = shopCar.style.background;
-          buyCarWrap.style.display = 'none';
-          // Добавляем машину в гараж
-          garage.addCarInGarage(car, garageWrapCar);
-      });
-      // Добавляем кнопку
-      buyCar.appendChild(btnBuy);
-    })
-  }
-  buyText.textContent = 'Купить машину';
-  buyCarWrap.appendChild(buyText);
-  buyCarWrap.appendChild(buyCar);
-  document.body.appendChild(buyCarWrap);
-}
-// Вызов функции покупки машины
-buyCar();
+  speakWithBoss.firstSpeakWithAngry();
+
+
+
+carShop.buyCarCar(Object.values(carShop.carArray[0]));
+carShop.buyCarCar(Object.values(carShop.carArray[1]));
+
 
 // Фоновая музыка
 
 
-function playSound() {
-  audio.src = './audio/1.mp3'; // Указываем путь к звуку "клика"
-  audio.autoplay = true; // Автоматически запускаем
-}
+// function playSound() {
+//   audio.src = './audio/1.mp3'; // Указываем путь к звуку "клика"
+//   audio.autoplay = true; // Автоматически запускаем
+// }
 
 function stopSound() {
   audio.pause();
@@ -235,28 +180,10 @@ function playGame() {
     // Функция повторяет прорисовку самой себя
     myReq = requestAnimationFrame(playGame);
   }
-  if(setting.score > 19999 && setting.score < 20005){
+  if(setting.score > 1998 && setting.score < 2005){
     stopGame();
-    // firstSpeakWithAngry();
-    speakWitchAngry.then(() => {
-      numSpeak++;
-      setTimeout(() => {
-        // После 5 сек. добавляем кнопку
-        dialogArea.appendChild(btnReady);
-        btnReady.textContent = 'Ехать дальше';
-        // И обработчик клика по ней
-        btnReady.addEventListener('click', () => {
-          // Очищаем диалог
-          dialogArea.innerHTML = ' ';
-          // Очищаем фон
-          dialogArea.style.display = 'none';
-          enemyBoss.style.display = 'none';
-          // Нажатие на Enter
-          continueGame();
-        })
-      }, 1000)
-    });
-    setting.score +=5;
+    speakWithBoss.firstSpeakWithAngry();
+    setting.score +=15;
   }
 }
 
@@ -372,4 +299,5 @@ function continueGame(e = 'Space') {
     document.removeEventListener('keydown', enterGame);
   }
 }
+
 document.addEventListener('keydown', stopGame);

@@ -2,6 +2,102 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/buyCar.js":
+/*!***********************!*\
+  !*** ./src/buyCar.js ***!
+  \***********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "carArray": () => /* binding */ carArray,
+/* harmony export */   "buyCarCar": () => /* binding */ buyCarCar
+/* harmony export */ });
+/* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.js */ "./src/index.js");
+/* harmony import */ var _garage_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./garage.js */ "./src/garage.js");
+
+
+
+
+let carArray = [
+  {name: 'ЗАЗ 965 "Запорожец"', price: 405, speed: 1.2, picture: 1},
+  {name: 'ВАЗ-11113 "Lada Oka"', price: 410, speed: 1.22, picture: 2} 
+];
+
+// Массив с машинами(чтобы удалять border)
+let carArrayBorder = [];
+
+// Обёртка
+  let buyCarWrap = document.createElement('div');
+  buyCarWrap.classList.add('buyCarWrap');
+  // Машины
+  let buyCar = document.createElement('div');
+  buyCar.classList.add('buyCar');
+  // Текст
+  let buyText = document.createElement('span');
+  // Купить Кнопка
+  let btnBuy = document.createElement('button');
+  btnBuy.classList.add('btnBuy');
+  btnBuy.textContent = 'Купить';
+  buyText.textContent = 'Купить машину';
+  buyCarWrap.appendChild(buyText);
+  buyCarWrap.appendChild(buyCar);
+  document.body.appendChild(buyCarWrap);
+
+console.log(carArray[0])
+
+function buyCarCar([carName, carPrice, carSpeed, carPicture]){
+  console.log(carName);
+  let buyCarItem = document.createElement('div');
+    buyCarItem.classList.add('buyCarItem');
+    buyCarItem.style.background = `transparent url('./image/car/${carPicture}.png') center / cover no-repeat`;
+    // Название машины
+    let buyCarItemText = document.createElement('span');
+    buyCarItemText.textContent = carName;
+    // Цена машины
+    let buyCarItemPrice = document.createElement('span');
+    buyCarItemPrice.textContent = `Стоимость ${carPrice}`;
+    // Скорость машины
+    let buyCarItemSpeed = document.createElement('span');
+    buyCarItemSpeed.textContent = carSpeed;
+    // Добавляем все значения к машинe
+    let buyCarItemTextWrap = document.createElement('div');
+    buyCarItemTextWrap.appendChild(buyCarItemText);
+    buyCarItemTextWrap.appendChild(buyCarItemPrice);
+    buyCarItemTextWrap.appendChild(buyCarItemSpeed);
+    buyCarItem.appendChild(buyCarItemTextWrap);
+    // Добавляем машину в окно
+    buyCar.appendChild(buyCarItem);
+
+    carArrayBorder.push(buyCarItem);
+    //Клик по машине
+    buyCarItem.addEventListener('click', function checkItem(e){
+      //Убираем обводку с отстальных машин
+      carArrayBorder.forEach(item => {
+        item.style.border = 'none';
+      })
+      console.log(_index_js__WEBPACK_IMPORTED_MODULE_0__.car)
+      // Добавляем обводку к выбранной машине
+        let shopCar = e.target;
+        shopCar.style.border = '2px solid green';
+      // Добавляем обработчик на кнопку "Купить"
+        btnBuy.addEventListener('click', function(){
+          // По кнопке купить машина игрока меняется на ту, что выбрал
+          _index_js__WEBPACK_IMPORTED_MODULE_0__.car.style.background = shopCar.style.background;
+          buyCarWrap.style.display = 'none';
+          // Добавляем машину в гараж
+          _garage_js__WEBPACK_IMPORTED_MODULE_1__.addCarInGarage(_index_js__WEBPACK_IMPORTED_MODULE_0__.car);
+      });
+      // Добавляем кнопку
+      buyCar.appendChild(btnBuy);
+    })
+
+} 
+
+
+
+/***/ }),
+
 /***/ "./src/garage.js":
 /*!***********************!*\
   !*** ./src/garage.js ***!
@@ -14,6 +110,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "closeGarage": () => /* binding */ closeGarage,
 /* harmony export */   "addCarInGarage": () => /* binding */ addCarInGarage
 /* harmony export */ });
+/* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.js */ "./src/index.js");
+
+
+;
 
 
 // Открыть гараж
@@ -35,7 +135,7 @@ const closeGarage = function(modal){
 
 // Добавить машину в гараж 
 
-const addCarInGarage = function(car, modal){
+const addCarInGarage = function(car, modal = _index_js__WEBPACK_IMPORTED_MODULE_0__.garageWrapCar){
   let item = car.cloneNode();
   modal.appendChild(item);
   console.log('Добавил');
@@ -63,22 +163,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "btnGarageClose": () => /* binding */ btnGarageClose,
 /* harmony export */   "garageWrap": () => /* binding */ garageWrap,
 /* harmony export */   "garageWrapCar": () => /* binding */ garageWrapCar,
-/* harmony export */   "enemyBoss": () => /* binding */ enemyBoss,
-/* harmony export */   "dialogArea": () => /* binding */ dialogArea,
-/* harmony export */   "btnReady": () => /* binding */ btnReady,
 /* harmony export */   "enterGame": () => /* binding */ enterGame
 /* harmony export */ });
 /* harmony import */ var _garage_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./garage.js */ "./src/garage.js");
 /* harmony import */ var _speakWithBoss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./speakWithBoss */ "./src/speakWithBoss.js");
+/* harmony import */ var _buyCar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./buyCar */ "./src/buyCar.js");
 
 ; // Гараж
  //диалог с Боссом
+ // Покупка машины (массив со всеми машинами)
 
 
-
-
-
-  let load = document.querySelector('.load');
+let load = document.querySelector('.load');
   window.addEventListener('load', () => {
     load.classList.add('hidden');
   })
@@ -97,26 +193,21 @@ __webpack_require__.r(__webpack_exports__);
   garageWrap = document.querySelector('.garage'), //Гараж (модалка)
   garageWrapCar = document.querySelector('.garage__wrap'); //Гараж (обёртка для машин)
 
-
-  garageBtn.addEventListener('click', () => _garage_js__WEBPACK_IMPORTED_MODULE_0__.openGarage(garageWrap));
-  btnGarageClose.addEventListener('click', () => _garage_js__WEBPACK_IMPORTED_MODULE_0__.closeGarage(garageWrap));
-
-  // ID функции - прорисовщика
+// ID функции - прорисовщика
   let myReq, secondMyReq;
 // Массив с рекордами
   let record = [];
 
- // Создание элемента босса и диалогового окна
- const enemyBoss = document.createElement('div');
-          enemyBoss.classList.add('enemyBoss');
-          // Окно
- const dialogArea = document.createElement('div');
- bgArea.appendChild(dialogArea);
- const btnReady = document.createElement('button');
+  // Открытие / Закрытие гаража
+  garageBtn.addEventListener('click', () => _garage_js__WEBPACK_IMPORTED_MODULE_0__.openGarage(garageWrap));
+  btnGarageClose.addEventListener('click', () => _garage_js__WEBPACK_IMPORTED_MODULE_0__.closeGarage(garageWrap));
+
+ 
 // Фоновая песня (Пока что просто объект Audio)
 let audio = new Audio();
 
 car.classList.add('car');
+
 // Начало по нажатии на Enter 
 function enterGame(e) {
   if (e.code === 'Enter') {
@@ -141,71 +232,23 @@ const setting = {
   traffic: 3
 };
 
-let speakWitchAngry = new Promise((resolve, reject) => {
-  _speakWithBoss__WEBPACK_IMPORTED_MODULE_1__.firstSpeakWithAngry()
-}).then(() => {  // Когда диалог с боссом закончился 
-  speakWitchAngry.addBtnSpeakBoss();
-});
+// Разговор с боссом
 
-// Покупка машины
-function buyCar(){
-  // Обёртка
-  let buyCarWrap = document.createElement('div');
-  buyCarWrap.classList.add('buyCarWrap')
-  // Машины
-  let buyCar = document.createElement('div');
-  buyCar.classList.add('buyCar');
-  // Текст
-  let buyText = document.createElement('span');
-  // Купить Кнопка
-  let btnBuy = document.createElement('button');
-  btnBuy.classList.add('btnBuy');
-  btnBuy.textContent = 'Купить';
-  // Массив с машинами(чтобы удалять border)
-  let carArray = [];
-  // Каждая машина
-  for(let i = 1; i < 3; i++){
-    let buyCarItem = document.createElement('div');
-    buyCarItem.classList.add('buyCarItem');
-    buyCarItem.style.background = `transparent url('./image/car/${i}.png') center / cover no-repeat`;
-    buyCar.appendChild(buyCarItem);
-    carArray.push(buyCarItem);
-    //Клик по машине
-    buyCarItem.addEventListener('click', function checkItem(e){
-      //Убираем обводку с отстальных машин
-      carArray.forEach(item => {
-        item.style.border = 'none';
-      })
-      // Добавляем обводку к выбранной машине
-        let shopCar = e.target;
-        shopCar.style.border = '2px solid green';
-      // Добавляем обработчик на кнопку "Купить"
-        btnBuy.addEventListener('click', function(){
-          // По кнопке купить машина игрока меняется на ту, что выбрал
-          car.style.background = shopCar.style.background;
-          buyCarWrap.style.display = 'none';
-          // Добавляем машину в гараж
-          _garage_js__WEBPACK_IMPORTED_MODULE_0__.addCarInGarage(car, garageWrapCar);
-      });
-      // Добавляем кнопку
-      buyCar.appendChild(btnBuy);
-    })
-  }
-  buyText.textContent = 'Купить машину';
-  buyCarWrap.appendChild(buyText);
-  buyCarWrap.appendChild(buyCar);
-  document.body.appendChild(buyCarWrap);
-}
-// Вызов функции покупки машины
-buyCar();
+  _speakWithBoss__WEBPACK_IMPORTED_MODULE_1__.firstSpeakWithAngry();
+
+
+
+_buyCar__WEBPACK_IMPORTED_MODULE_2__.buyCarCar(Object.values(_buyCar__WEBPACK_IMPORTED_MODULE_2__.carArray[0]));
+_buyCar__WEBPACK_IMPORTED_MODULE_2__.buyCarCar(Object.values(_buyCar__WEBPACK_IMPORTED_MODULE_2__.carArray[1]));
+
 
 // Фоновая музыка
 
 
-function playSound() {
-  audio.src = './audio/1.mp3'; // Указываем путь к звуку "клика"
-  audio.autoplay = true; // Автоматически запускаем
-}
+// function playSound() {
+//   audio.src = './audio/1.mp3'; // Указываем путь к звуку "клика"
+//   audio.autoplay = true; // Автоматически запускаем
+// }
 
 function stopSound() {
   audio.pause();
@@ -307,28 +350,10 @@ function playGame() {
     // Функция повторяет прорисовку самой себя
     myReq = requestAnimationFrame(playGame);
   }
-  if(setting.score > 19999 && setting.score < 20005){
+  if(setting.score > 1998 && setting.score < 2005){
     stopGame();
-    // firstSpeakWithAngry();
-    speakWitchAngry.then(() => {
-      numSpeak++;
-      setTimeout(() => {
-        // После 5 сек. добавляем кнопку
-        dialogArea.appendChild(btnReady);
-        btnReady.textContent = 'Ехать дальше';
-        // И обработчик клика по ней
-        btnReady.addEventListener('click', () => {
-          // Очищаем диалог
-          dialogArea.innerHTML = ' ';
-          // Очищаем фон
-          dialogArea.style.display = 'none';
-          enemyBoss.style.display = 'none';
-          // Нажатие на Enter
-          continueGame();
-        })
-      }, 1000)
-    });
-    setting.score +=5;
+    _speakWithBoss__WEBPACK_IMPORTED_MODULE_1__.firstSpeakWithAngry();
+    setting.score +=15;
   }
 }
 
@@ -444,6 +469,7 @@ function continueGame(e = 'Space') {
     document.removeEventListener('keydown', enterGame);
   }
 }
+
 document.addEventListener('keydown', stopGame);
 
 
@@ -466,54 +492,77 @@ __webpack_require__.r(__webpack_exports__);
 let numSpeak = 0;
 
 const speakAngryBoss = [
-  ['Эй, придурок. Мне сказали, ты хочешь бросить вызов моим парням? Думаешь, мы дадим шанс какому-то выскочке? Для начала набери 20 000 очков чтобы показать себя'],
+  ['Эй, придурок. Мне сказали, ты хочешь бросить вызов моим парням? Думаешь, мы дадим шанс какому-то выскочке? Для начала набери 2 000 очков чтобы показать себя'],
   ['Неплохо, придурок, но для нас ты всё равно лох']
-]
+];
 
 
+// Создание элемента босса и диалогового окна
+const enemyBoss = document.createElement('div');
+enemyBoss.classList.add('enemyBoss');
+// Окно
+const dialogArea = document.createElement('div');
+dialogArea.classList.add('dialogArea');
+// Кнопка "Поехали"
+const btnReady = document.createElement('button');
 
 
-  // Стартовый диалог со злодеем 
-const firstSpeakWithAngry = function(dialogWrap = _index__WEBPACK_IMPORTED_MODULE_0__.dialogArea, boss = _index__WEBPACK_IMPORTED_MODULE_0__.enemyBoss, bgAreaSec = _index__WEBPACK_IMPORTED_MODULE_0__.bgArea, btnReadySec = _index__WEBPACK_IMPORTED_MODULE_0__.btnReady){
-    dialogWrap.classList.add('dialogArea');
-    boss.style.display = 'block';
-    dialogWrap.style.display = 'block';
-    bgAreaSec.appendChild(_index__WEBPACK_IMPORTED_MODULE_0__.dialogArea);
-    bgAreaSec.appendChild(_index__WEBPACK_IMPORTED_MODULE_0__.enemyBoss);
-    // Плавное появление букв
-    let speak = speakAngryBoss[numSpeak].toString();
-    let arr = speak.split('');
-
-    // Скорость появления букв
-    let i = 0.02;
+// Плавное появление букв. Получает фразу, празделяет на массив с буквами
+function ghostText(text){
+  let i = 0.02;
+  let arr = text.split('');
     arr.map((key) => {
       let span = document.createElement('span');
       span.textContent = key;
       span.style.animation = `1s ghost ${i}s forwards`;
       i += 0.02;
-      _index__WEBPACK_IMPORTED_MODULE_0__.dialogArea.appendChild(span);
+      dialogArea.appendChild(span);
 })
-
-console.log('Работаю')
-  numSpeak++;
-  setTimeout(() => {
-    // После 1 сек. добавляем кнопку
-    dialogWrap.appendChild(btnReadySec);
-    btnReadySec.textContent = 'Начать';
-    // И обработчик клика по ней
-    btnReadySec.addEventListener('click', () => {
-      // Очищаем диалог
-      dialogWrap.innerHTML = ' ';
-      // Очищаем фон
-      dialogWrap.style.display = 'none';
-      boss.style.display = 'none';
-      // Нажатие на Enter
-      document.addEventListener('keydown', _index__WEBPACK_IMPORTED_MODULE_0__.enterGame);
-    })
-  }, 1000)
-
 }
 
+
+
+
+  // Стартовый диалог со злодеем 
+const firstSpeakWithAngry = function(dialogWrap = dialogArea, boss = enemyBoss, bgAreaSec = _index__WEBPACK_IMPORTED_MODULE_0__.bgArea, btnReadySec = btnReady){
+   // В фон вставляем окно с диалогом (где текст)
+   bgAreaSec.appendChild(dialogWrap);
+   bgAreaSec.appendChild(enemyBoss);
+  
+  // Показываем картинку босса 
+    boss.style.display = 'block';
+  // Показываем текст
+    dialogWrap.style.display = 'block';
+   
+    // Достаём фразу из массива с фразами босса
+    let speak = speakAngryBoss[numSpeak].toString();
+    
+    // Функция появления букв
+    ghostText(speak);
+      // После 1 сек. добавляем кнопку "Начать"
+      dialogWrap.appendChild(btnReadySec);
+      btnReadySec.textContent = 'Начать';
+      // И обработчик клика по ней
+      btnReadySec.addEventListener('click', () => {
+        // Очищаем диалог
+        dialogWrap.innerHTML = ' ';
+        // Скрываем фон и босса
+        dialogWrap.style.display = 'none';
+        boss.style.display = 'none';
+        // Нажатие на Enter
+        if(numSpeak >= 1){
+          console.log(numSpeak)
+          document.addEventListener('keydown', _index__WEBPACK_IMPORTED_MODULE_0__.continueGame);
+        }
+        else{
+          document.addEventListener('keydown', _index__WEBPACK_IMPORTED_MODULE_0__.enterGame);
+        }
+        // Увеличиваем фразу в массиве
+      numSpeak++;
+        
+      })
+      
+}
 
 
 // (dialogWrap = dialogArea, boss = enemyBoss, bgAreaSec = bgArea) => {

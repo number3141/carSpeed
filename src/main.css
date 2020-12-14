@@ -217,27 +217,46 @@ body{
 }
 .buyCarWrap span {
   color: white;
-  font-size: 32px;
-  margin-top: 20px;
-  margin-bottom: 20px;
   text-transform: uppercase;
+  text-align: center;
+  font-size: 24px;
 }
 .buyCar{
   position: relative;
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-start;
   width: 50%;
   height: 60%;
   background: rgba(0, 0, 0, 0.9);
   border-radius: 15px;
+  padding-top: 40px;
 }
 .buyCarItem {
+  display: flex;
+  position: relative;
+  flex-direction: column;
   width: 90px;
   height: 180px;
   cursor: pointer;
   transition: .3s;
   border-radius: 5px;
+  color: #fff;
+}
+.buyCarItem > div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 100%;
+  font-size: 10px;
+  padding: 0;
+  margin: 10px auto;
+}
+.buyCarItem > div > span {
+  font-size: 15px;
+  margin: auto;
+  padding: 10px 0;
 }
 .buyCarItem:hover{
   width: 100px;

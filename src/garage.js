@@ -1,5 +1,8 @@
 'use strict'
 
+import {garageWrapCar} from './index.js'
+
+
 // Открыть гараж
 
 export const openGarage = function(modal){
@@ -19,7 +22,7 @@ export const closeGarage = function(modal){
 
 // Добавить машину в гараж 
 
-export const addCarInGarage = function(car, modal){
+export const addCarInGarage = function(car, modal = garageWrapCar){
   let item = car.cloneNode();
   modal.appendChild(item);
   console.log('Добавил');
