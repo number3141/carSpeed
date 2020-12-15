@@ -11,18 +11,23 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "carArray": () => /* binding */ carArray,
+/* harmony export */   "carPlayerSpeed": () => /* binding */ carPlayerSpeed,
 /* harmony export */   "buyCarCar": () => /* binding */ buyCarCar
 /* harmony export */ });
-/* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.js */ "./src/index.js");
-/* harmony import */ var _garage_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./garage.js */ "./src/garage.js");
+/* harmony import */ var _src_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../src/index.js */ "./src/index.js");
+/* harmony import */ var _src_garage_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../src/garage.js */ "./src/garage.js");
 
 
 
 
 let carArray = [
-  {name: 'ЗАЗ 965 "Запорожец"', price: 405, speed: 1.2, picture: 1},
-  {name: 'ВАЗ-11113 "Lada Oka"', price: 410, speed: 1.22, picture: 2} 
+  {name: 'ЗАЗ 965 "Запорожец"', price: 405, speed: 1, picture: 1},
+  {name: 'ВАЗ-11113 "Lada Oka"', price: 410, speed: 1, picture: 2} 
 ];
+
+// Скорость машины (поворота)
+
+let carPlayerSpeed = 0;
 
 // Массив с машинами(чтобы удалять border)
 let carArrayBorder = [];
@@ -50,7 +55,7 @@ function buyCarCar([carName, carPrice, carSpeed, carPicture]){
   console.log(carName);
   let buyCarItem = document.createElement('div');
     buyCarItem.classList.add('buyCarItem');
-    buyCarItem.style.background = `transparent url('./image/car/${carPicture}.png') center / cover no-repeat`;
+    buyCarItem.style.background = `transparent url('./src/image/car/${carPicture}.png') center / cover no-repeat`;
     // Название машины
     let buyCarItemText = document.createElement('span');
     buyCarItemText.textContent = carName;
@@ -59,7 +64,8 @@ function buyCarCar([carName, carPrice, carSpeed, carPicture]){
     buyCarItemPrice.textContent = `Стоимость ${carPrice}`;
     // Скорость машины
     let buyCarItemSpeed = document.createElement('span');
-    buyCarItemSpeed.textContent = carSpeed;
+    carPlayerSpeed = carSpeed;
+    buyCarItemSpeed.textContent = `Скорость ${carSpeed}`;
     // Добавляем все значения к машинe
     let buyCarItemTextWrap = document.createElement('div');
     buyCarItemTextWrap.appendChild(buyCarItemText);
@@ -76,17 +82,17 @@ function buyCarCar([carName, carPrice, carSpeed, carPicture]){
       carArrayBorder.forEach(item => {
         item.style.border = 'none';
       })
-      console.log(_index_js__WEBPACK_IMPORTED_MODULE_0__.car)
+      console.log(_src_index_js__WEBPACK_IMPORTED_MODULE_0__.car)
       // Добавляем обводку к выбранной машине
         let shopCar = e.target;
         shopCar.style.border = '2px solid green';
       // Добавляем обработчик на кнопку "Купить"
         btnBuy.addEventListener('click', function(){
           // По кнопке купить машина игрока меняется на ту, что выбрал
-          _index_js__WEBPACK_IMPORTED_MODULE_0__.car.style.background = shopCar.style.background;
+          _src_index_js__WEBPACK_IMPORTED_MODULE_0__.car.style.background = shopCar.style.background;
           buyCarWrap.style.display = 'none';
           // Добавляем машину в гараж
-          _garage_js__WEBPACK_IMPORTED_MODULE_1__.addCarInGarage(_index_js__WEBPACK_IMPORTED_MODULE_0__.car);
+          _src_garage_js__WEBPACK_IMPORTED_MODULE_1__.addCarInGarage(_src_index_js__WEBPACK_IMPORTED_MODULE_0__.car);
       });
       // Добавляем кнопку
       buyCar.appendChild(btnBuy);
@@ -165,9 +171,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "garageWrapCar": () => /* binding */ garageWrapCar,
 /* harmony export */   "enterGame": () => /* binding */ enterGame
 /* harmony export */ });
-/* harmony import */ var _garage_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./garage.js */ "./src/garage.js");
-/* harmony import */ var _speakWithBoss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./speakWithBoss */ "./src/speakWithBoss.js");
-/* harmony import */ var _buyCar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./buyCar */ "./src/buyCar.js");
+/* harmony import */ var _src_garage_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../src/garage.js */ "./src/garage.js");
+/* harmony import */ var _src_speakWithBoss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../src/speakWithBoss */ "./src/speakWithBoss.js");
+/* harmony import */ var _src_buyCar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../src/buyCar */ "./src/buyCar.js");
 
 ; // Гараж
  //диалог с Боссом
@@ -199,8 +205,8 @@ let load = document.querySelector('.load');
   let record = [];
 
   // Открытие / Закрытие гаража
-  garageBtn.addEventListener('click', () => _garage_js__WEBPACK_IMPORTED_MODULE_0__.openGarage(garageWrap));
-  btnGarageClose.addEventListener('click', () => _garage_js__WEBPACK_IMPORTED_MODULE_0__.closeGarage(garageWrap));
+  garageBtn.addEventListener('click', () => _src_garage_js__WEBPACK_IMPORTED_MODULE_0__.openGarage(garageWrap));
+  btnGarageClose.addEventListener('click', () => _src_garage_js__WEBPACK_IMPORTED_MODULE_0__.closeGarage(garageWrap));
 
  
 // Фоновая песня (Пока что просто объект Audio)
@@ -234,19 +240,19 @@ const setting = {
 
 // Разговор с боссом
 
-  _speakWithBoss__WEBPACK_IMPORTED_MODULE_1__.firstSpeakWithAngry();
+  _src_speakWithBoss__WEBPACK_IMPORTED_MODULE_1__.firstSpeakWithAngry();
 
 
 
-_buyCar__WEBPACK_IMPORTED_MODULE_2__.buyCarCar(Object.values(_buyCar__WEBPACK_IMPORTED_MODULE_2__.carArray[0]));
-_buyCar__WEBPACK_IMPORTED_MODULE_2__.buyCarCar(Object.values(_buyCar__WEBPACK_IMPORTED_MODULE_2__.carArray[1]));
+_src_buyCar__WEBPACK_IMPORTED_MODULE_2__.buyCarCar(Object.values(_src_buyCar__WEBPACK_IMPORTED_MODULE_2__.carArray[0]));
+_src_buyCar__WEBPACK_IMPORTED_MODULE_2__.buyCarCar(Object.values(_src_buyCar__WEBPACK_IMPORTED_MODULE_2__.carArray[1]));
 
 
 // Фоновая музыка
 
 
 // function playSound() {
-//   audio.src = './audio/1.mp3'; // Указываем путь к звуку "клика"
+//   audio.src = '/src/audio/1.mp3'; // Указываем путь к звуку "клика"
 //   audio.autoplay = true; // Автоматически запускаем
 // }
 
@@ -289,7 +295,7 @@ function startGame() {
   for (let i = 0; i < 5; i++) {
     const house = document.createElement('div');
     house.classList.add('house');
-    house.style.backgroundImage = 'url("./image/home.webp")';
+    house.style.backgroundImage = 'url("./src/image/kaktus.png")';
     // Позиции каждой черты(не путать с движением. Это просто расположение)
     house.style.top = (i * 82) * -1 + 'px';
     let ans = Math.random() * (bgArea.offsetWidth - 100);
@@ -334,16 +340,16 @@ function playGame() {
     moveEnemy();
     moveBg();
     if (keys.ArrowLeft && setting.x > 0) {
-      setting.x -= setting.speed;
+      setting.x -= _src_buyCar__WEBPACK_IMPORTED_MODULE_2__.carPlayerSpeed;
     }
     if (keys.ArrowRight && setting.x < (gameArea.offsetWidth - car.offsetWidth)) {
-      setting.x += setting.speed;
+      setting.x += _src_buyCar__WEBPACK_IMPORTED_MODULE_2__.carPlayerSpeed;
     }
     if (keys.ArrowUp && setting.y > 0) {
-      setting.y -= setting.speed;
+      setting.y -= _src_buyCar__WEBPACK_IMPORTED_MODULE_2__.carPlayerSpeed;
     }
     if (keys.ArrowDown && setting.y < (gameArea.offsetHeight - car.offsetHeight)) {
-      setting.y += setting.speed;
+      setting.y += _src_buyCar__WEBPACK_IMPORTED_MODULE_2__.carPlayerSpeed;
     }
     car.style.left = setting.x + 'px';
     car.style.top = setting.y + 'px';
@@ -352,7 +358,7 @@ function playGame() {
   }
   if(setting.score > 1998 && setting.score < 2005){
     stopGame();
-    _speakWithBoss__WEBPACK_IMPORTED_MODULE_1__.firstSpeakWithAngry();
+    _src_speakWithBoss__WEBPACK_IMPORTED_MODULE_1__.firstSpeakWithAngry();
     setting.score +=15;
   }
 }
@@ -437,7 +443,7 @@ function moveEnemy() {
       key.y = -100 * setting.traffic;
       key.style.left = Math.random() * (gameArea.offsetWidth - 50) + 'px';
       let im = Math.round(Math.random() * 3) + 1;
-      key.style.background = `url('./image/enemy/${im}.webp') center / cover no-repeat`;
+      key.style.background = `url('/src/srcimage/enemy/${im}.webp') center / cover no-repeat`;
     }
   }
 }

@@ -1,11 +1,15 @@
-import * as main from './index.js'
-import * as garage from './garage.js'
+import * as main from '/src/index.js'
+import * as garage from '/src/garage.js'
 
 
 export let carArray = [
-  {name: 'ЗАЗ 965 "Запорожец"', price: 405, speed: 1.2, picture: 1},
-  {name: 'ВАЗ-11113 "Lada Oka"', price: 410, speed: 1.22, picture: 2} 
+  {name: 'ЗАЗ 965 "Запорожец"', price: 405, speed: 1, picture: 1},
+  {name: 'ВАЗ-11113 "Lada Oka"', price: 410, speed: 1, picture: 2} 
 ];
+
+// Скорость машины (поворота)
+
+export let carPlayerSpeed = 0;
 
 // Массив с машинами(чтобы удалять border)
 let carArrayBorder = [];
@@ -33,7 +37,7 @@ export function buyCarCar([carName, carPrice, carSpeed, carPicture]){
   console.log(carName);
   let buyCarItem = document.createElement('div');
     buyCarItem.classList.add('buyCarItem');
-    buyCarItem.style.background = `transparent url('./image/car/${carPicture}.png') center / cover no-repeat`;
+    buyCarItem.style.background = `transparent url('./src/image/car/${carPicture}.png') center / cover no-repeat`;
     // Название машины
     let buyCarItemText = document.createElement('span');
     buyCarItemText.textContent = carName;
@@ -42,7 +46,8 @@ export function buyCarCar([carName, carPrice, carSpeed, carPicture]){
     buyCarItemPrice.textContent = `Стоимость ${carPrice}`;
     // Скорость машины
     let buyCarItemSpeed = document.createElement('span');
-    buyCarItemSpeed.textContent = carSpeed;
+    carPlayerSpeed = carSpeed;
+    buyCarItemSpeed.textContent = `Скорость ${carSpeed}`;
     // Добавляем все значения к машинe
     let buyCarItemTextWrap = document.createElement('div');
     buyCarItemTextWrap.appendChild(buyCarItemText);

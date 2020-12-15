@@ -43,7 +43,7 @@ table {
 }
 
 body{
-  background-color: #B6FFC7;
+  background-color: rgb(255, 223, 79);
   overflow: hidden;
 }
 
@@ -97,6 +97,7 @@ body{
   left: 125px;
 }
 
+
 .enemy{
   background: transparent url('./image/enemy/1.webp') center / cover no-repeat;
 }
@@ -109,7 +110,7 @@ body{
   position: relative;
   margin: auto;
   overflow: hidden;
-  background: #000;
+  background: #000000;
 }
 
 /* Полосы на дороге */

@@ -1,7 +1,7 @@
 'use strict'
-import * as garage from './garage.js'; // Гараж
-import * as speakWithBoss from './speakWithBoss'; //диалог с Боссом
-import * as carShop from './buyCar' // Покупка машины (массив со всеми машинами)
+import * as garage from '/src/garage.js'; // Гараж
+import * as speakWithBoss from '/src/speakWithBoss'; //диалог с Боссом
+import * as carShop from '/src/buyCar' // Покупка машины (массив со всеми машинами)
 
 
 let load = document.querySelector('.load');
@@ -76,7 +76,7 @@ carShop.buyCarCar(Object.values(carShop.carArray[1]));
 
 
 // function playSound() {
-//   audio.src = './audio/1.mp3'; // Указываем путь к звуку "клика"
+//   audio.src = '/src/audio/1.mp3'; // Указываем путь к звуку "клика"
 //   audio.autoplay = true; // Автоматически запускаем
 // }
 
@@ -119,7 +119,7 @@ function startGame() {
   for (let i = 0; i < 5; i++) {
     const house = document.createElement('div');
     house.classList.add('house');
-    house.style.backgroundImage = 'url("./image/home.webp")';
+    house.style.backgroundImage = 'url("./src/image/kaktus.png")';
     // Позиции каждой черты(не путать с движением. Это просто расположение)
     house.style.top = (i * 82) * -1 + 'px';
     let ans = Math.random() * (bgArea.offsetWidth - 100);
@@ -164,16 +164,16 @@ function playGame() {
     moveEnemy();
     moveBg();
     if (keys.ArrowLeft && setting.x > 0) {
-      setting.x -= setting.speed;
+      setting.x -= carShop.carPlayerSpeed;
     }
     if (keys.ArrowRight && setting.x < (gameArea.offsetWidth - car.offsetWidth)) {
-      setting.x += setting.speed;
+      setting.x += carShop.carPlayerSpeed;
     }
     if (keys.ArrowUp && setting.y > 0) {
-      setting.y -= setting.speed;
+      setting.y -= carShop.carPlayerSpeed;
     }
     if (keys.ArrowDown && setting.y < (gameArea.offsetHeight - car.offsetHeight)) {
-      setting.y += setting.speed;
+      setting.y += carShop.carPlayerSpeed;
     }
     car.style.left = setting.x + 'px';
     car.style.top = setting.y + 'px';
@@ -267,7 +267,7 @@ function moveEnemy() {
       key.y = -100 * setting.traffic;
       key.style.left = Math.random() * (gameArea.offsetWidth - 50) + 'px';
       let im = Math.round(Math.random() * 3) + 1;
-      key.style.background = `url('./image/enemy/${im}.webp') center / cover no-repeat`;
+      key.style.background = `url('/src/srcimage/enemy/${im}.webp') center / cover no-repeat`;
     }
   }
 }
