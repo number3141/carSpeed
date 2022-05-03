@@ -5,15 +5,14 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Чё смотришь?</title>
-  <!-- fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hubballi&display=swap" rel="stylesheet">
+  <title>С праздником!</title>
   <!-- normalize -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
     integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- анимэйт -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <!-- SLIDER -->
   <!-- Добавляем стили из CDN -->
   <link rel="stylesheet" type="text/css" href="./css/slick.css">
@@ -26,75 +25,369 @@
 </head>
 
 <body>
+
+  <div class="load">
+    <img src="./img/240.gif" alt="loading">
+  </div>
+
   <div class="scrollContainer">
+    <!-- First photo -->
+    <div class="item">
+      <div class="item__text">
+        <p class="text">
+          С этого всё и начиналось
+        </p>
+      </div>
+      <div class="item__photo">
+        <div class="photo">
+          <a href="./img/1.jpg" data-fancybox="gallery" data-caption="Я люблю тебя">
+            <img class="photo__image" src="./img/1.jpg" alt="self" />
+          </a>
+        </div>
+      </div>
+      <div class="item__timer">
+        <p class="item__text">
+          С этого момента прошло уже
+        </p>
+        <!-- Дата первого дня -->
+        <div class="dayBlock First__dayBlock"></div>
+        <div class="dayBlock First__hoursBlock"></div>
+        <div class="dayBlock First__minutsBlock"></div>
+        <div class="dayBlock First__secondsBlock"></div>
+      </div>
+    </div>
+
+
+    <div class="item">
+      <div class="item__text">
+        <p class="text">
+          Здесь мы влюбились
+        </p>
+      </div>
+      <div class="item__photo">
+        <div class="photo">
+          <a href="./img/2.jpg" data-fancybox="gallery" data-caption="Я люблю тебя">
+            <img class="photo__image" src="./img/2.jpg" alt="self" />
+          </a>
+        </div>
+      </div>
+      <div class="item__timer">
+        <p class="item__text">
+          С этого момента прошло уже
+        </p>
+        <!-- Дата второго дня -->
+        <div class="dayBlock Sec__dayBlock"></div>
+        <div class="dayBlock Sec__hoursBlock"></div>
+        <div class="dayBlock Sec__minutsBlock"></div>
+        <div class="dayBlock Sec__secondsBlock"></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item__text">
+        <p class="text">
+          Ты смущал меня одним своим присутствием
+        </p>
+      </div>
+      <div class="item__photo">
+        <div class="photo">
+          <a href="./img/3.jpg" data-fancybox="gallery" data-caption="Я люблю тебя">
+            <img class="photo__image" src="./img/3.jpg" alt="self" />
+          </a>
+        </div>
+      </div>
+      <div class="item__timer">
+        <p class="item__text">
+          С этого момента прошло уже
+        </p>
+        <!-- Дата второго дня -->
+        <div class="dayBlock Third__dayBlock"></div>
+        <div class="dayBlock Third__hoursBlock"></div>
+        <div class="dayBlock Third__minutsBlock"></div>
+        <div class="dayBlock Third__secondsBlock"></div>
+      </div>
+    </div>
+
+
+    <div class="item">
+      <div class="item__text">
+        <p class="text">
+          Мы очень любили пить
+        </p>
+      </div>
+      <div class="item__photo">
+        <div class="photo">
+          <a href="./img/4.jpg" data-fancybox="gallery" data-caption="Я люблю тебя">
+            <img class="photo__image" src="./img/4.jpg" alt="self" />
+          </a>
+        </div>
+      </div>
+      <div class="item__timer">
+        <p class="item__text">
+          С этого момента прошло уже
+        </p>
+        <!-- Дата второго дня -->
+        <div class="dayBlock Four__dayBlock"></div>
+        <div class="dayBlock Four__hoursBlock"></div>
+        <div class="dayBlock Four__minutsBlock"></div>
+        <div class="dayBlock Four__secondsBlock"></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item__text">
+        <p class="text">
+          И варить пельмени
+        </p>
+      </div>
+      <div class="item__photo">
+        <div class="photo">
+          <a href="./img/5.jpg" data-fancybox="gallery" data-caption="Я люблю тебя">
+            <img class="photo__image" src="./img/5.jpg" alt="self" />
+          </a>
+        </div>
+      </div>
+      <div class="item__timer">
+        <p class="item__text">
+          С этого момента прошло уже
+        </p>
+        <!-- Дата второго дня -->
+        <div class="dayBlock Five__dayBlock"></div>
+        <div class="dayBlock Five__hoursBlock"></div>
+        <div class="dayBlock Five__minutsBlock"></div>
+        <div class="dayBlock Five__secondsBlock"></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item__text">
+        <p class="text">
+          Вместе смотреть сериалы
+        </p>
+      </div>
+      <div class="item__photo">
+        <div class="photo">
+          <a href="./img/6.jpg" data-fancybox="gallery" data-caption="Я люблю тебя">
+            <img class="photo__image" src="./img/6.jpg" alt="self" />
+          </a>
+        </div>
+      </div>
+      <div class="item__timer">
+        <p class="item__text">
+          С этого момента прошло уже
+        </p>
+        <!-- Дата второго дня -->
+        <div class="dayBlock Six__dayBlock"></div>
+        <div class="dayBlock Six__hoursBlock"></div>
+        <div class="dayBlock Six__minutsBlock"></div>
+        <div class="dayBlock Six__secondsBlock"></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item__text">
+        <p class="text">
+          И просто валяться 
+        </p>
+      </div>
+      <div class="item__photo">
+        <div class="photo">
+          <a href="./img/7.jpg" data-fancybox="gallery" data-caption="Я люблю тебя">
+            <img class="photo__image" src="./img/7.jpg" alt="self" />
+          </a>
+        </div>
+      </div>
+      <div class="item__timer">
+        <p class="item__text">
+          С этого момента прошло уже
+        </p>
+        <!-- Дата второго дня -->
+        <div class="dayBlock Sev__dayBlock"></div>
+        <div class="dayBlock Sev__hoursBlock"></div>
+        <div class="dayBlock Sev__minutsBlock"></div>
+        <div class="dayBlock Sev__secondsBlock"></div>
+      </div>
+    </div>
+
+
+    <div class="item">
+      <div class="item__text">
+        <p class="text">
+          Ты согревал меня холодной зимой
+        </p>
+      </div>
+      <div class="item__photo">
+        <div class="photo">
+          <a href="./img/8.jpg" data-fancybox="gallery" data-caption="Я люблю тебя">
+            <img class="photo__image" src="./img/8.jpg" alt="self" />
+          </a>
+        </div>
+      </div>
+      <div class="item__timer">
+        <p class="item__text">
+          С этого момента прошло уже
+        </p>
+        <!-- Дата второго дня -->
+        <div class="dayBlock Ei__dayBlock"></div>
+        <div class="dayBlock Ei__hoursBlock"></div>
+        <div class="dayBlock Ei__minutsBlock"></div>
+        <div class="dayBlock Ei__secondsBlock"></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item__text">
+        <p class="text">
+          И продолжаешь согревать сейчас
+        </p>
+      </div>
+      <div class="item__photo">
+        <div class="photo">
+          <a href="./img/9.jpg" data-fancybox="gallery" data-caption="Я люблю тебя">
+            <img class="photo__image" src="./img/9.jpg" alt="self" />
+          </a>
+        </div>
+      </div>
+      <div class="item__timer">
+        <p class="item__text">
+          С этого момента прошло уже
+        </p>
+        <!-- Дата второго дня -->
+        <div class="dayBlock Ni__dayBlock"></div>
+        <div class="dayBlock Ni__hoursBlock"></div>
+        <div class="dayBlock Ni__minutsBlock"></div>
+        <div class="dayBlock Ni__secondsBlock"></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item__text">
+        <p class="text">
+          Поздравляю тебя с датой! <br>
+          Я люблю тебя!
+        </p>
+      </div>
+      <div class="item__photo">
+            <a href="./img/10.jpg" data-fancybox="gallery" data-caption="Я люблю тебя">
+              <img class="photo__image" src="./img/10.jpg" alt="self" />
+            </a>
+
+            <a style="display: none;" href="./img/11.jpg" data-fancybox="gallery" data-caption="Я люблю тебя">
+              <img class="photo__image" src="./img/11.jpg" alt="self" />
+            </a>
+
+            <a style="display: none;" href="./img/12.jpg" data-fancybox="gallery" data-caption="Я люблю тебя">
+              <img class="photo__image" src="./img/12.jpg" alt="self" />
+            </a>
+
+
+            <a style="display: none;" href="./img/13.jpg" data-fancybox="gallery" data-caption="Я люблю тебя">
+              <img class="photo__image" src="./img/13.jpg" alt="self" />
+            </a>
+
+        </div>
+      </div>
+
+
+      <div class="item__timer">
+        <p class="item__text">
+          С этого момента прошло уже
+        </p>
+        <!-- Дата второго дня -->
+        <div class="dayBlock Ten__dayBlock"></div>
+        <div class="dayBlock Ten__hoursBlock"></div>
+        <div class="dayBlock Ten__minutsBlock"></div>
+        <div class="dayBlock Ten__secondsBlock"></div>
+      </div>
+    </div>
+
+
+
     <!-- section -->
-    <div class="section-welcome-wrap display-block display-block__header">
+    <!-- <div class="section-welcome-wrap display-block display-block__header">
       <div class="wrapper">
         <div class="section-welcome">
-          <p class="welcome-text">
+          <p class="welcome-text animate__animated animate__fadeInDown">
             Привет! В погоне за креативным поздравлением я устал его переделывать и что-то менять, поэтому сейчас ты
             увидишь то, что удалось выцарапать из множества сырых идей <br>
           </p>
-          <div class='scrollDown'>P.S. листай ниже, малыха!</div>
+
+          <div class="image-block">
+            <div class="pictWrap">
+              <a href="./img/first.jpg" data-fancybox="gallery" data-caption="Люблю">
+                <img src="./img/fir.jpg" alt="self" />
+              </a>
+            </div>
+          </div>
+          
+          <div class="data-block">
+            <div class="animate__animated animate__fadeInDown animate__delay-1s 1s"></div>
+            <div class="dayBlock-text animate__animated animate__fadeInDown animate__delay-2s 2s">
+              Ровно столько дней я просыпаюсь с мыслью о тебе
+            </div>
+            <div class="day-block__subtitle animate__animated animate__fadeInDown animate__delay-3s 3s">
+              (ну, почти столько)
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- section two -->
-    <div class="section-welcome-wrap display-block">
+    <!-- <div class="section-welcome-wrap display-block">
       <div class="wrapper">
-        <h1>Мы знакомы с тобой: </h1>
+        <h1 class="animate__animated animate__fadeInDown animate__delay-1s 1s">Мы знакомы с тобой: </h1>
         <div class="data-block">
-          <div class="dayBlock"></div>
-          <div class="dayBlock-text">
+          <div class="animate__animated animate__fadeInDown animate__delay-1s 1s"></div>
+          <div class="dayBlock-text animate__animated animate__fadeInDown animate__delay-2s 2s">
             Ровно столько дней я просыпаюсь с мыслью о тебе
           </div>
-          <div class="day-block__subtitle">
+          <div class="day-block__subtitle animate__animated animate__fadeInDown animate__delay-3s 3s">
             (ну, почти столько)
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- sec 3 -->
-    <div class="section-welcome-wrap display-block">
+    <!-- <div class="section-welcome-wrap display-block">
       <div class="wrapper">
         <div class="data-block">
-          <div class="hoursBlock dayBlock"></div>
-          <div class="day-block__title">
+          <div class="hoursBlock dayBlock animate__animated animate__fadeInDown animate__delay-1s 1s"></div>
+          <div class="day-block__title animate__animated animate__fadeInDown animate__delay-2s 2s">
             Примерно столько часов я являюсь обладателем "Пушкинской карты"
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- sec 4 -->
-    <div class="section-welcome-wrap display-block">
+    <!-- <div class="section-welcome-wrap display-block">
       <div class="wrapper">
         <div class="data-block">
-          <div class="minutsBlock"></div>
-          <div class="day-block__title">
+          <div class="minutsBlock animate__animated animate__fadeInDown animate__delay-1s 1s"></div>
+          <div class="day-block__title animate__animated animate__fadeInDown animate__delay-2s 2s">
             Любования твоей внешностью и характером
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- sec 5 -->
-    <div class="section-welcome-wrap display-block">
+    <!-- <div class="section-welcome-wrap display-block">
       <div class="wrapper">
         <div class="data-block">
-          <div class="secondsBlock"></div>
-          <div class="day-block__title">
+          <div class="secondsBlock animate__animated animate__fadeInDown animate__delay-1s 1s"></div>
+          <div class="day-block__title animate__animated animate__fadeInDown animate__delay-2s 2s">
             Прям секунд?
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <div class="section-welcome-wrap display-block">
+    <!-- <div class="section-welcome-wrap display-block">
       <div class="wrapper">
         <div class="data-block">
-          <div class="day-block__title photo__title">
+          <div class="day-block__title photo__title animate__animated animate__fadeInDown animate__delay-1s 1s">
             В честь праздника я подготовил для тебя великолепные фотографии
           </div>
-          <div class="smallText">
+          <div class="smallText animate__animated animate__fadeInDown animate__delay-1s 1s">
             (Можешь листать или нажимать)
           </div>
           <div class="single-item">
@@ -106,11 +399,11 @@
               </div>
             </div>
             <div class="image-block">
-             <div class="pictWrap">
-              <a href="./img/neotr.png" data-fancybox="gallery" data-caption="Люблю">
-                <img src="./img/neotr.png" alt="self" />
-              </a>
-             </div>
+              <div class="pictWrap">
+                <a href="./img/neotr.png" data-fancybox="gallery" data-caption="Люблю">
+                  <img src="./img/neotr.png" alt="self" />
+                </a>
+              </div>
             </div>
             <div class="image-block">
               <div class="pictWrap">
@@ -122,12 +415,17 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
+
+
+
   <script type="text/javascript" src="./js/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"
+    integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <!-- <script src="./js/jquery.fancybox.min.js"></script> -->
-  
+
   <script type="text/javascript" src="./js/slick.min.js"></script>
   <script src="./js/slider.js"></script>
   <script src="./js/script.js"></script>

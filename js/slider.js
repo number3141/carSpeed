@@ -1,1 +1,5 @@
-$('.single-item').slick();
+$('.single-item').slick({
+  infinite: true,
+  slidesToShow: 3,
+  slidesToScroll: 3
+});
